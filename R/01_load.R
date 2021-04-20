@@ -22,5 +22,5 @@ ENV_raw <- ENV_raw %>%
   as_tibble()
 
 # Write data --------------------------------------------------------------
-write_tsv(x = SPE_raw,file = "data/01_SPE.tsv")
-write_tsv(x = ENV_raw,file = "data/01_ENV.tsv")
+write_tsv(x = SPE_raw,file = "data/01_SPE.tsv.gz")
+write_tsv(x = ENV_raw,file = "data/01_ENV.tsv.gz")
