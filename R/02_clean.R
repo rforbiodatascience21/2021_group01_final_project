@@ -3,20 +3,21 @@ rm(list = ls())
 
 
 # Load libraries ----------------------------------------------------------
-library("tidyverse")
+library(tidyverse)
 
 
 # Load data ---------------------------------------------------------------
-SPE_raw <- read_csv(file = "data/_raw/SPE_pitlatrine.csv",col_names = TRUE)
-ENV_raw <- read_csv(file = "data/_raw/ENV_pitlatrine.csv",col_names = TRUE)
+ENV <- read_tsv(file = "data/01_ENV.tsv.gz")
+SPE <- read_tsv(file = "data/01_SPE.tsv.gz")
+
 
 # Wrangle data ------------------------------------------------------------
-SPE_raw <- SPE_raw %>%
-  as_tibble()
+Data <- SPE %>%
+  pivot_longer(!Taxa,names_to = "Samples",values_to = "Value") %>%
+  full_join(ENV,by="Samples") %>%
+  separate(Samples, c("Country", "Latrine_No","Latrine_Depth"),"\\_")
 
-ENV_raw <- ENV_raw %>%
-  as_tibble()
 
 # Write data --------------------------------------------------------------
-write_tsv(x = SPE_raw,file = "data/01_SPE.tsv.gz")
-write_tsv(x = ENV_raw,file = "data/01_ENV.tsv.gz")
+write_tsv(x = Data,
+          file = "data/02_data.tsv.gz")
