@@ -1,6 +1,7 @@
 ---
 title: "Report Group_1"
 output: html_document
+
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -8,8 +9,11 @@ library(magick)
 options(knitr.duplicate.label = "allow")
 ```
 
+<font size ="3">Summary_1</font>\
 ```{r child = "Summary_1.Rmd"}
 ```
+
+<font size ="3">Summary_2</font>\
 ```{r child = "Summary_2.Rmd"}
 ```
 

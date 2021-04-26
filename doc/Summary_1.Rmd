@@ -7,12 +7,11 @@ knitr::opts_chunk$set(echo = TRUE)
 library(magick)
 ```
 
-```{r plots summary 1}
+```{r plots summary 1,echo = FALSE}
 image <- image_read("/cloud/project/png_plots/Temp_plot.png")
 image_scale(image,"500")
 ```
 
-```{r}
-```
-Taxa = variables
-Country and Country_Name = Country of latrines
+\
+Taxa = variables\
+Country and Country_Name = Country of latrines \
