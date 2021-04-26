@@ -13,7 +13,12 @@ Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 # Plot data ---------------------------------------------------------------
 Corr_plot <- ggpairs(Data_aug,
-                     mapping = aes(color = Country_Name),
+                     mapping = aes(colou = Country_Name),
                      columns = c('pH', 'Temp', 'TS', 'VS', 'VFA', 'CODt', 'CODs', 
-                                 'perCODsbyt', 'NH4', 'Prot', 'Carbo', 'Latrine_Depth_cm'))
+                                 'perCODsbyt', 'NH4', 'Prot', 'Carbo', 'Latrine_Depth_cm'),
+                     columnLabels = c('pH', 'Temp', 'TS', 'VS', 'VFA', 'CODt', 'CODs', 
+                                 'perCODsbyt', 'NH4', 'Prot', 'Carbo', 'Latrine depth')) +
+  theme_minimal() +
+  theme(legend.position = "bottom") +
+  labs(title = "Correlation plots of of environmental factors by country")
 Corr_plot
