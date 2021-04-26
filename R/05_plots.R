@@ -15,4 +15,6 @@ Temp_plot <- Data_aug %>%
   ggplot(mapping = aes(x = Temp,
                        y = Country_Name)) +
   geom_boxplot() + theme_classic()
-Temp_plot
+ggsave("png_plots/Temp_plot.png")
+
+Unique <- Data_aug %>% distinct(Taxa)
