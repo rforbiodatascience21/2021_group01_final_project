@@ -1,0 +1,16 @@
+---
+title: "Report Group_1"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(magick)
+options(knitr.duplicate.label = "allow")
+```
+
+```{r child = "Summary_1.Rmd"}
+```
+```{r child = "Summary_2.Rmd"}
+```
+
+
