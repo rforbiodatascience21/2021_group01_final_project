@@ -19,13 +19,20 @@ Data <- Data %>%
 
 # Model data ------------------------------------------------------------
 lmmodel1 <- Data %>%
-  select_if(is.numeric) %>%
-  glm(Country_binary ~ .,
+  pivot_wider(Taxa)
+
+
+  select_if(is.numeric)
+
+  
+  
+  glm(Country_binary ~ pH+Temp+TS+VS+VFA+CODt+CODs+perCODsbyt+NH4+Prot+Carbo,
       data = .,
       family = binomial(link = "logit"))
 
 summary(lmmodel1)
-drop1(lmmodel1,test="F")
+
+lmmodel1$terms
 
 
 # Write data --------------------------------------------------------------
