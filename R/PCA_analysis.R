@@ -6,7 +6,7 @@ library(cowplot)
 
 PCA_analysis<-function(data){
   
-  pca_fit <- Data %>% 
+  pca_fit <- Data %>%  
     select(where(is.numeric)) %>% # retain only numeric columns
     scale() %>% # scale data
     prcomp() # do PCA
