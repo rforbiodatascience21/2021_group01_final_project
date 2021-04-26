@@ -6,17 +6,21 @@ rm(list = ls())
 library("tidyverse")
 
 
+# Download data -----------------------------------------------------------
+if (!file.exists("processed.cleveland.data")) {
+  download.file(url = "http://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data", destfile = "processed.cleveland.data")
+}
+require(tools)
+md5sum("processed.cleveland.data")
+
+
 # Load data ---------------------------------------------------------------
-SPE_raw <- read_csv(file = "data/_raw/SPE_pitlatrine.csv",col_names = TRUE)
-ENV_raw <- read_csv(file = "data/_raw/ENV_pitlatrine.csv",col_names = TRUE)
+Cleveland_raw <- read.csv("processed.cleveland.data", header = FALSE)
 
 # Wrangle data ------------------------------------------------------------
-SPE_raw <- SPE_raw %>%
+Cleveland_raw <- Cleveland_raw %>%
   as_tibble()
 
-ENV_raw <- ENV_raw %>%
-  as_tibble()
 
 # Write data --------------------------------------------------------------
-write_tsv(x = SPE_raw,file = "data/01_SPE.tsv.gz")
-write_tsv(x = ENV_raw,file = "data/01_ENV.tsv.gz")
+write_tsv(x = Cleveland_raw,file = "data/Cleveland.tsv.gz")
