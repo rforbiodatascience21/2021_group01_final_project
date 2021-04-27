@@ -10,19 +10,15 @@ library("broom")
 # Load data ---------------------------------------------------------------
 Data <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
-# Wrangle data ------------------------------------------------------------
-Data <- Data %>%
-  mutate(Country_binary = case_when(Country == "T" ~ 0, Country == "V" ~ 1),
-         Taxa_factor = factor(Taxa) ) %>%
-  select(!c(Country,Latrine_Depth, Country_Name,Taxa), )
-  
-
 # Model data ------------------------------------------------------------
 lmmodel1 <- Data %>%
   select_if(is.numeric) %>%
-  glm(Country_binary ~ pH+Temp+TS+VS+VFA+CODt+CODs+perCODsbyt+NH4+Prot+Carbo,
-      data = .,
-      family = binomial(link = "logit"))
+  glm(formula = diagnosis_of_heart_disease ~ Age + Sex + Chest_pain_type + Resting_blood_pressure 
+      + Serum_cholestoral + Fasting_blood_sugar + Resting_electrocardiographic + 
+        Maximum_heart_rate_achieved + Exercise_induced_angina + ST_depression_induced_by_exercise +
+        The_slope_of_the_peak_exercise_ST_segment + Number_of_major_vessels_colored_by_flourosopy +
+        Thal + Location_num,
+      family = gaussian)
 
 summary(lmmodel1)
 
