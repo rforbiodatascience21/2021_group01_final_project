@@ -7,17 +7,37 @@ library(tidyverse)
 
 
 # Load data ---------------------------------------------------------------
-ENV <- read_tsv(file = "data/01_ENV.tsv.gz")
-SPE <- read_tsv(file = "data/01_SPE.tsv.gz")
+Cleveland <- read_tsv(file = "data/Cleveland.tsv.gz")
+Hungarian <- read_tsv(file = "data/Hungarian.tsv.gz")
+Switzerland <- read_tsv(file = "data/Switzerland.tsv.gz")
+Long_Beach <- read_tsv(file = "data/Long_Beach.tsv.gz")
 
 
 # Wrangle data ------------------------------------------------------------
-Data <- SPE %>%
-  pivot_longer(!Taxa,names_to = "Samples",values_to = "Value") %>%
-  full_join(ENV,by="Samples") %>%
-  separate(Samples, c("Country", "Latrine_No","Latrine_Depth"),"\\_")
+Data <- Cleveland %>%
+  full_join(Hungarian, by = c("Age", "Sex", "Chest_pain_type", "Resting_blood_pressure",
+                              "Serum_cholestoral", "Fasting_blood_sugar", 
+                              "Resting_electrocardiographic", "Maximum_heart_rate_achieved", 
+                              "Exercise_induced_angina", "ST_depression_induced_by_exercise", 
+                              "The_slope_of_the_peak_exercise_ST_segment", 
+                              "Number_of_major_vessels_colored_by_flourosopy", "Thal", 
+                              "diagnosis_of_heart_disease", "Location")) %>%
+  full_join(Switzerland, by = c("Age", "Sex", "Chest_pain_type", "Resting_blood_pressure",
+                              "Serum_cholestoral", "Fasting_blood_sugar", 
+                              "Resting_electrocardiographic", "Maximum_heart_rate_achieved", 
+                              "Exercise_induced_angina", "ST_depression_induced_by_exercise", 
+                              "The_slope_of_the_peak_exercise_ST_segment", 
+                              "Number_of_major_vessels_colored_by_flourosopy", "Thal", 
+                              "diagnosis_of_heart_disease", "Location")) %>%
+  full_join(Long_Beach, by = c("Age", "Sex", "Chest_pain_type", "Resting_blood_pressure",
+                                "Serum_cholestoral", "Fasting_blood_sugar", 
+                                "Resting_electrocardiographic", "Maximum_heart_rate_achieved", 
+                                "Exercise_induced_angina", "ST_depression_induced_by_exercise", 
+                                "The_slope_of_the_peak_exercise_ST_segment", 
+                                "Number_of_major_vessels_colored_by_flourosopy", "Thal", 
+                                "diagnosis_of_heart_disease", "Location"))
+
 
 
 # Write data --------------------------------------------------------------
-write_tsv(x = Data,
-          file = "data/02_data.tsv.gz")
+write_tsv(x = Data, file = "data/02_data.tsv.gz")
