@@ -7,16 +7,16 @@ library("tidyverse")
 
 
 # Load data ---------------------------------------------------------------
-SPE_raw <- read_csv(file = "data/_raw/SPE_pitlatrine.csv",col_names = TRUE)
-ENV_raw <- read_csv(file = "data/_raw/ENV_pitlatrine.csv",col_names = TRUE)
+Heart_cleve_raw <- read_file(file = "data/_raw/cleveland.data")
 
 # Wrangle data ------------------------------------------------------------
-SPE_raw <- SPE_raw %>%
-  as_tibble()
+# change placment of \n
 
-ENV_raw <- ENV_raw %>%
-  as_tibble()
+Data <- Heart_cleve_raw %>% 
+  str_split("\n") 
+
+class(Data)
 
 # Write data --------------------------------------------------------------
-write_tsv(x = SPE_raw,file = "data/01_SPE.tsv.gz")
-write_tsv(x = ENV_raw,file = "data/01_ENV.tsv.gz")
+
+write_tsv(x = Data,file = "data/01_Data_temp.tsv.gz",delim =" ")
