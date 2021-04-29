@@ -22,6 +22,20 @@ lmmodel1 <- Data %>%
 
 summary(lmmodel1)
 
+tidy(lmmodel1)
+
+lmmodel2 <- Data %>%
+  select_if(is.numeric) %>%
+  glm(formula = diagnosis_of_heart_disease ~ Chest_pain_type  
+        + Resting_electrocardiographic + 
+        Maximum_heart_rate_achieved + Exercise_induced_angina + ST_depression_induced_by_exercise +
+         Number_of_major_vessels_colored_by_flourosopy +
+        Thal -1 ,
+      family = gaussian)
+
+summary(lmmodel2)
+
+
 
 # Write data --------------------------------------------------------------
 #write_tsv(x = ,file = )
