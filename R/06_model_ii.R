@@ -13,6 +13,7 @@ Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 # Plot data ---------------------------------------------------------------
 Corr_plot <- ggpairs(Data_aug,
+                     mapping(colour = diagnosis_of_heart_disease),
                      columns = c("Age","Sex", "Chest_pain_type",
                                  "Resting_blood_pressure","Serum_cholestoral",
                                  "Fasting_blood_sugar","Resting_electrocardiographic",
