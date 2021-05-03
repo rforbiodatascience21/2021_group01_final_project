@@ -29,7 +29,9 @@ Corr_plot <- ggpairs(Data_aug,
                                  "slope of ST segment",
                                  "Diagnosis"),
                      upper = list(continuous = "blank", combo = "blank", discrete = "blank", na = "na"),
-                     lower = list(continuous = "points", combo = "box_no_facet", discrete = "ratio", na = "na")) +
-  theme_minimal() +
-  labs(title = "Correlation plots of predictive variables stratified on diagnosis")
+                     lower = list(continuous = "points", combo = "box_no_facet", discrete = "ratio", na = "na"),
+                     labeller = label_wrap_gen(10)) +
+  labs(title = "Correlation plots of predictive variables stratified on diagnosis") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  fig
 Corr_plot
