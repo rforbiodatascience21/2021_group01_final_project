@@ -5,6 +5,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(magick)
+options(knitr.duplicate.label = "allow")
 ```
 
 ```{r plots summary 1,echo = FALSE}
