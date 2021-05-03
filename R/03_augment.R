@@ -33,7 +33,10 @@ Data_aug <- Data %>%
                                                  Exercise_induced_angina == 0 ~ "Not present"),
          slope_of_ST_cat = case_when(The_slope_of_the_peak_exercise_ST_segment == 1 ~"uplsoping",
                                      The_slope_of_the_peak_exercise_ST_segment == 2 ~"flat",
-                                     The_slope_of_the_peak_exercise_ST_segment == 3 ~"downsloping"))
+                                     The_slope_of_the_peak_exercise_ST_segment == 3 ~"downsloping"),
+         Thal_cat = case_when(Thal == 3 ~"normal",
+                              Thal == 6 ~"fixed defect",
+                              Thal == 7 ~"reversable defect"))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = Data_aug,
