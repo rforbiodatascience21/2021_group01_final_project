@@ -9,11 +9,10 @@ library(GGally)
 
 
 # Load data ---------------------------------------------------------------
-Data_aug <- read_tsv(file = "../data/03_data_aug.tsv.gz")
+Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 # Plot data ---------------------------------------------------------------
 Corr_plot <- ggpairs(Data_aug,
-                     mapping = aes(colour = Location),
                      columns = c("Age","Sex", "Chest_pain_type",
                                  "Resting_blood_pressure","Serum_cholestoral",
                                  "Fasting_blood_sugar","Resting_electrocardiographic",
