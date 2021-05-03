@@ -30,7 +30,10 @@ Data_aug <- Data %>%
                                                       Resting_electrocardiographic == 1 ~ "ST-T abnormality", 
                                                       Resting_electrocardiographic == 2 ~ "LV hypertrophy"),
          Exercise_induced_angina_cat = case_when(Exercise_induced_angina == 1 ~ "Present", 
-                                                 Exercise_induced_angina == 0 ~ "Not present"))
+                                                 Exercise_induced_angina == 0 ~ "Not present"),
+         slope_of_ST_cat = case_when(The_slope_of_the_peak_exercise_ST_segment == 1 ~"uplsoping",
+                                     The_slope_of_the_peak_exercise_ST_segment == 2 ~"flat",
+                                     The_slope_of_the_peak_exercise_ST_segment == 3 ~"downsloping"))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = Data_aug,
