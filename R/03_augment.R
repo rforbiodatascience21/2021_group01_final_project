@@ -12,8 +12,7 @@ Data <- read_tsv(file = "data/02_data.tsv.gz")
 
 # Wrangle data ------------------------------------------------------------
 Data_aug <- Data %>%
-  mutate(Country_Name = case_when(Country == "T" ~ "Tanzania", Country == "V" ~ "Vietnam"),
-         Latrine_Depth_cm = Latrine_Depth*20)
+  mutate(Location_num = case_when(Location == "Cleveland" ~ 0, Location == "Switzerland" ~ 1, Location == "Hungarian" ~ 2, Location == "Long Beach" ~ 3))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = Data_aug,

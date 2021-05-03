@@ -11,19 +11,14 @@ PCA_analysis<-function(data){
     scale() %>% # scale data
     prcomp() # do PCA
   
-  pca_fit %>%
-    augment(Data) %>% # add original dataset back in
-    ggplot(aes(.fittedPC1, .fittedPC2, color = Latrine_Depth_cm)) + #color = Country_Name
-    geom_point(size = 1.5) 
-  
   # plot principal components 
   pca_plot1 <- pca_fit %>%
     augment(Data) %>% # add original dataset back in
-    ggplot(aes(.fittedPC1, .fittedPC2, color = Country_Name)) +
+    ggplot(aes(.fittedPC1, .fittedPC2, color = diagnosis_of_heart_disease)) +
     geom_point(size = 1.5) +
-    scale_color_manual(
-      values = c(Tanzania = "violet", Vietnam = "#D55E00") # Tanzania = "#D55E00", Vietnam = "#0072B2"
-    ) +
+    #scale_color_manual(
+    #  values = c(O = "violet", 1 = "#D55E00", 2 ="#0072B", 3 ="red", 4 = "blue") 
+    #) +
     theme_classic() + background_grid()
   
   #------------------------------------------------------------------
@@ -76,8 +71,7 @@ PCA_analysis<-function(data){
   
 }
 
-Data <- read_tsv(file = "data/03_data_aug.tsv.gz") %>% 
-  select(-Country, -Latrine_Depth, Latrine_No)
+Data <- read_tsv(file = "data/02_data.tsv.gz") %>% drop_na()
 
 PCA_analysis(Data)
 
