@@ -37,6 +37,10 @@ Data <- Cleveland %>%
                                 "Number_of_major_vessels_colored_by_flourosopy", "Thal", 
                                 "diagnosis_of_heart_disease", "Location"))
 
+# Changing 0 in cholesterol and blood pressure to NA
+Data <- Data %>% 
+  mutate(Serum_cholestoral = case_when(Serum_cholestoral > 0 ~ Serum_cholestoral),
+         Resting_blood_pressure = case_when(Resting_blood_pressure > 0 ~ Resting_blood_pressure))
 
 
 # Write data --------------------------------------------------------------
