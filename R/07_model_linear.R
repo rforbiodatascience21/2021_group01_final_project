@@ -10,32 +10,61 @@ library("broom")
 # Load data ---------------------------------------------------------------
 Data <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
-# Model data ------------------------------------------------------------
-lmmodel1 <- Data %>%
-  select_if(is.numeric) %>%
-  glm(formula = diagnosis_of_heart_disease ~ Age + Sex + Chest_pain_type + Resting_blood_pressure 
-      + Serum_cholestoral + Fasting_blood_sugar + Resting_electrocardiographic + 
-        Maximum_heart_rate_achieved + Exercise_induced_angina + ST_depression_induced_by_exercise +
-        The_slope_of_the_peak_exercise_ST_segment + Number_of_major_vessels_colored_by_flourosopy +
-        Thal + Location_num,
-      family = gaussian)
+Data %>%
+  ggplot(aes(Age, fill = as.factor(Location)))+
+  geom_density(alpha=0.5)+
+  facet_grid(~ diagnosis_of_heart_disease)+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(color="Location")
+
+
+Data %>%
+  ggplot(aes(Age, fill = as.factor(Location)))+
+  geom_histogram(position="dodge",binwidth = 5)+
+  facet_grid(~ diagnosis_of_heart_disease)+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(color="Location")
+
+
+Data %>%
+  ggplot(aes(Age, fill = as.factor(Location)))+
+  geom_density(alpha=0.5)+
+  facet_grid(~ Diagnosis_of_disease)+
+  theme_classic()+
+  theme(legend.position = "bottom")+
+  labs(color="Location")
+
+# Data wrangling ---------------------------------------------------------------
+
+#To get around the problem with the different data sizes, 
+# we remove the rows containing NA
+
+Data_model <- Data %>%
+  na.omit() %>%
+  select(Diagnosis_of_disease,is.numeric) %>%
+  select(!diagnosis_of_heart_disease)
+
+
+lmmodel1 <- Data_model %>%
+  glm(formula = as.factor(Diagnosis_of_disease) ~ Age,
+      family = binomial())
+
+Data_model <- Data_model %>%
+  bind_cols(predict(lmmodel1,Data_model, type = "link",se.fit = TRUE))
+
+Data_model %>%
+  ggplot(aes(Age,as.factor(Diagnosis_of_disease)))+
+  geom_point()
+
+
+
+plot(lmmodel1)
 
 summary(lmmodel1)
 
 tidy(lmmodel1)
-
-lmmodel2 <- Data %>%
-  select_if(is.numeric) %>%
-  glm(formula = diagnosis_of_heart_disease ~ Chest_pain_type  
-        + Resting_electrocardiographic + 
-        Maximum_heart_rate_achieved + Exercise_induced_angina + ST_depression_induced_by_exercise +
-         Number_of_major_vessels_colored_by_flourosopy +
-        Thal -1 ,
-      family = gaussian)
-
-summary(lmmodel2)
-
-
 
 # Write data --------------------------------------------------------------
 #write_tsv(x = ,file = )
