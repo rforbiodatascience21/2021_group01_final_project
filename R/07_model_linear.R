@@ -72,11 +72,15 @@ lmmodel2 <- Data_model %>%
 tidy(lmmodel2)
 AIC(lmmodel2)
 
+
 Matrix_conf<- Confusion_matrix(lmmodel1, Data_test)%>%
-  mutate(Model = "lmmodel1")
+  mutate(Model = "lmmodel1",
+         Model_formular = "Diagnosis_of_disease_No ~ Age")
+
 
 Matrix_conf1<- Confusion_matrix(lmmodel2, Data_test)%>%
-  mutate(Model = "lmmodel2")
+  mutate(Model = "lmmodel2",
+         Model_formular = "Diagnosis_of_disease_No ~ Age+Sex+Chest_pain_type")
 
 
 Matrix_conf<-Matrix_conf %>%
