@@ -1,5 +1,6 @@
 ```{r setup, include=FALSE}
 opts_chunk$set(cache=TRUE)
+library(magick)
 options(knitr.duplicate.label = "allow")
 ```
 
@@ -18,14 +19,22 @@ For more details on authoring R presentations please visit <https://support.rstu
 - Bullet 2
 - Bullet 3
 
-Slide With Code
+Slide With plot
 ========================================================
 
-```{r child = "Summary_1.Rmd"}
+```{r plots cholesterol,echo = FALSE}
+image <- image_read("/cloud/project/png_plots/Location_cholesterol_plot.png")
+image_scale(image,"500")
 ```
 
-Slide With Plot
+Slide With another plot
 ========================================================
+```{r plots location,echo = FALSE}
+image <- image_read("/cloud/project/png_plots/Location_disease_plot.png")
+image_scale(image,"500")
+```
 
+Slide With another plot
+========================================================
 ```{r child = "Summary_2.Rmd"}
 ```

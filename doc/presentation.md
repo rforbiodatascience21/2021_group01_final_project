@@ -15,25 +15,17 @@ For more details on authoring R presentations please visit <https://support.rstu
 - Bullet 2
 - Bullet 3
 
-Slide With Code
+Slide With plot
 ========================================================
 
+![plot of chunk plots cholesterol](presentation-figure/plots cholesterol-1.png)
 
-
-
-
-
-
-
-![plot of chunk plots summary 1](presentation-figure/plots summary 1-1.png)
-
-\
-Taxa = variables\
-Country and Country_Name = Country of latrines \
-
-Slide With Plot
+Slide With another plot
 ========================================================
+![plot of chunk plots location](presentation-figure/plots location-1.png)
 
+Slide With another plot
+========================================================
 
 
 

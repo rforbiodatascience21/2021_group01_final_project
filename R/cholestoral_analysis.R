@@ -5,9 +5,6 @@ rm(list = ls())
 # Load libraries ----------------------------------------------------------
 library(tidyverse)
 library(ggplot2)
-library(cowplot)
-library(ggpubr)
-
 
 # Load data ---------------------------------------------------------------
 Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
@@ -37,8 +34,6 @@ mean_string <- format_tsv(
   quote_escape = "double",
   eol = "\n")
 
-Location_cholesterol_plot + annotate("text", x = 550, y = 3, label = mean_string)
-
 # Location and heart disease plot
 # Here the serum cholesterol is also excluded since this is what is compared.
 Location_disease_plot <- Data_aug %>%
@@ -46,14 +41,32 @@ Location_disease_plot <- Data_aug %>%
   drop_na(Serum_cholestoral) %>%
   ggplot(aes(y = Location,
              fill = Diagnosis_of_disease)) +
-  geom_bar(position = position_dodge()) +
-  theme_classic()
+  geom_bar(position = position_dodge(),color = "black") +
+  scale_fill_manual(values=c("#999999", "#E69F00")) +
+  theme_classic() +
+  theme(legend.position = "none") +
+  xlab("Grey = people with disease not present\n Orange = people with disease present")
 
 Diagnosis_percentage <- Data_aug %>% 
-  distinct(Location, Serum_cholestoral) %>% 
+  distinct(Location, Serum_cholestoral,Diagnosis_of_disease) %>% 
   drop_na(Serum_cholestoral) %>% 
   group_by(Location) %>% 
-  summarise(mean = round(mean(Serum_cholestoral)))
+  count(Diagnosis_of_disease)
 
-ggarrange(Location_disease_plot, 
-          common.legend = TRUE)
+Diagnosis_percentage
+#(97/(104+97))*100
+#(80/(112+80))*100
+#(77/(34+77))*100
+diagnosis_string = "% of disease present\n Cleveland\t48.26%\n Hungarian\t41.67%\n Long Beach\t69.37%"
+
+# Make annotated plots
+Location_cholesterol_plot <- Location_cholesterol_plot + annotate("text", x = 550, y = 3, label = mean_string)
+Location_disease_plot <- Location_disease_plot + annotate("text", x = 100, y = 3, label = diagnosis_string)
+
+png(filename="/cloud/project/png_plots/Location_cholesterol_plot.png")
+plot(Location_cholesterol_plot)
+dev.off()
+
+png(filename="/cloud/project/png_plots/Location_disease_plot.png")
+plot(Location_disease_plot)
+dev.off()

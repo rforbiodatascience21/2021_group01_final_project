@@ -1,0 +1,20 @@
+---
+title: "cholesterol_analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(magick)
+options(knitr.duplicate.label = "allow")
+```
+
+```{r plots cholesterol,echo = FALSE}
+image <- image_read("/cloud/project/png_plots/Location_cholesterol_plot.png")
+image_scale(image,"500")
+```
+
+```{r plots location,echo = FALSE}
+image <- image_read("/cloud/project/png_plots/Location_disease_plot.png")
+image_scale(image,"500")
+```
