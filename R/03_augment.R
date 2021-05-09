@@ -36,7 +36,15 @@ Data_aug <- Data %>%
                                      The_slope_of_the_peak_exercise_ST_segment == 3 ~"downsloping"),
          Thal_cat = case_when(Thal == 3 ~"normal",
                               Thal == 6 ~"fixed defect",
-                              Thal == 7 ~"reversable defect"))
+                              Thal == 7 ~"reversable defect"),
+         Age_class = case_when(Age < 20 ~ ">20",
+                   20 <= Age & Age < 30 ~ "20-30",
+                   30 <= Age & Age < 40 ~ "30-40",
+                   40 <= Age & Age < 50 ~ "40-50",
+                   50 <= Age & Age < 60 ~ "50-60",
+                   60 <= Age & Age < 70 ~ "60-70",
+                   70 <= Age & Age < 80 ~ "70-80",
+                   80 <= Age ~ "80<"))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = Data_aug,
