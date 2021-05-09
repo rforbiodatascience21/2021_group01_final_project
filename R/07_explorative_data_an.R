@@ -1,7 +1,11 @@
-
 Data <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 ### Exploratory Data Analysis -------------------------------------------------
+library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+library(broom)
+library(cowplot)
 
 #Checking the Data Distribution
 
