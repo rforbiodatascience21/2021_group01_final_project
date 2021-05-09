@@ -34,6 +34,6 @@ Corr_plot <- ggpairs(Data_aug,
   labs(title = "Correlation plots of predictive variables stratified on diagnosis") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 Corr_plot
-png(filename="/cloud/project/results/Summary_correlation_plots.png")
+png(filename="/cloud/project/results/Summary_correlation_plots.png",  width = 1000, height = 800)
 Corr_plot
 dev.off()

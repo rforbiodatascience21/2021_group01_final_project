@@ -126,7 +126,7 @@ Summary_bar = ggarrange(plot_sex,
           plot_Thal,
           common.legend = TRUE) 
 
-png(filename="/cloud/project/results/Summary_bar_plots.png")
+png(filename="/cloud/project/results/Summary_bar_plots.png", width = 1000, height = 600)
 plot(Summary_bar)
 dev.off()
 
@@ -240,7 +240,7 @@ Summary_density = ggarrange(pltchol,
           pltnum,
           common.legend = TRUE) 
 
-png(filename="/cloud/project/results/Summary_density_plots.png")
+png(filename="/cloud/project/results/Summary_density_plots.png", width = 1000, height = 600)
 plot(Summary_density)
 dev.off()
 
