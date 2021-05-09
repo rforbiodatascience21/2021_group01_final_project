@@ -7,10 +7,16 @@ output: ioslides_presentation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-options(knitr.duplicate.label = "allow")
 ```
 
-# New slide
-```{r child = "cholesterol_analysis.Rmd"}
-```
+## Introduction
 
+## Methods: data processing
+Halli halløj\
+![](/cloud/project/results/Flowchart_R_presentation.png){width=100%}
+
+## Method: Summary 1
+![](/cloud/project/results/Summary_density_plots.png){width=100%}
+
+## Method: Summary 2
+![](/cloud/project/results/Summary_bar_plots.png){width=100%}
