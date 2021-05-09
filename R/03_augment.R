@@ -12,10 +12,10 @@ Data <- read_tsv(file = "data/02_data.tsv.gz")
 
 # Wrangle data ------------------------------------------------------------
 Data_aug <- Data %>%
-  mutate(Location_num = case_when(Location == "Cleveland" ~ 0, 
+  mutate(Location_num = factor(case_when(Location == "Cleveland" ~ 0, 
                                   Location == "Switzerland" ~ 1, 
                                   Location == "Hungarian" ~ 2, 
-                                  Location == "Long Beach" ~ 3),
+                                  Location == "Long Beach" ~ 3)),
          Diagnosis_of_disease = case_when(diagnosis_of_heart_disease == 0 ~ "Not present", 
                                           diagnosis_of_heart_disease >= 1 ~ "Present"),
          Sex_cat = case_when(Sex == 0 ~ "Female", 
