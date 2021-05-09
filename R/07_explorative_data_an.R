@@ -44,7 +44,8 @@ plot_sex = Data  %>% group_by(Diagnosis_of_disease) %>% count(Sex_cat) %>%
   ggplot(aes(y = Sex_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-               alpha=0.2) + 
+               alpha=0.2,
+           position = "dodge") + 
   labs(x = "Sex",
        y = "",
        color = "Diagnosis of disease",
@@ -54,7 +55,8 @@ plot_chest = Data  %>% group_by(Diagnosis_of_disease) %>% count(Chest_pain_type_
   ggplot(aes(y = Chest_pain_type_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.2) + 
+           alpha=0.2,
+           position = "dodge") + 
   labs(x = "Chest pain type",
        y = "",
        color = "Diagnosis of disease",
@@ -64,7 +66,8 @@ plot_sugar = Data  %>% group_by(Diagnosis_of_disease) %>% count(Fasting_blood_su
   ggplot(aes(y = Fasting_blood_sugar_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.2) + 
+           alpha=0.2,
+           position = "dodge") + 
   labs(x = "Fasting blood sugar",
        y = "",
        color = "Diagnosis of disease",
@@ -74,7 +77,8 @@ plot_electro = Data  %>% group_by(Diagnosis_of_disease) %>% count(Resting_electr
   ggplot(aes(y = Resting_electrocardiographic_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.2) + 
+           alpha=0.2,
+           position = "dodge") + 
   labs(x = "Electrocardiographic",
        y = "",
        color = "Diagnosis of disease",
@@ -84,7 +88,8 @@ plot_exercise = Data  %>% group_by(Diagnosis_of_disease) %>% count(Exercise_indu
   ggplot(aes(y = Exercise_induced_angina_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.2) + 
+           alpha=0.2,
+           position = "dodge") + 
   labs(x = "Exercise induced angina",
        y = "",
        color = "Diagnosis of disease",
@@ -94,7 +99,8 @@ plot_ST = Data  %>% group_by(Diagnosis_of_disease) %>% count(slope_of_ST_cat) %>
   ggplot(aes(y = slope_of_ST_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.2) + 
+           alpha=0.2,
+           position = "dodge") + 
   labs(x = "Slope of ST",
        y = "",
        color = "Diagnosis of disease",
@@ -104,7 +110,8 @@ plot_Thal = Data  %>% group_by(Diagnosis_of_disease) %>% count(Thal_cat) %>%
   ggplot(aes(y = Thal_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.2) + 
+           alpha=0.2,
+           position = "dodge") + 
   labs(x = "Thal",
        y = "",
        color = "Diagnosis of disease",
@@ -148,7 +155,7 @@ pltbox = Data %>%
                        fill = Diagnosis_of_disease)) + 
   geom_boxplot() + 
   xlim(0,80) +
-  labs(x = "Age", y=" ") + 
+  labs(x = "Age", y="") + 
   theme_minimal() + 
   theme(axis.title=element_blank(), 
         axis.text.y=element_blank()) + 

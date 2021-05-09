@@ -21,7 +21,7 @@ Data_aug <- Data %>%
          Sex_cat = factor(case_when(Sex == 0 ~ "Female", 
                              Sex == 1 ~ "Male")),
          Chest_pain_type_cat = factor(case_when(Chest_pain_type == 1 ~ "typical", 
-                                         Chest_pain_type == 2 ~ "atypcal",
+                                         Chest_pain_type == 2 ~ "atypical",
                                          Chest_pain_type == 3 ~ "non-anginal",
                                          Chest_pain_type == 4 ~ "asymptomatic")),
          Fasting_blood_sugar_cat = factor(case_when(Fasting_blood_sugar == 0 ~ "Low", 
