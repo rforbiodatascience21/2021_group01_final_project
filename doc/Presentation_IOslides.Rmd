@@ -8,6 +8,7 @@ output: ioslides_presentation
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
+library(kableExtra)
 ```
 
 ## Introduction
@@ -29,9 +30,12 @@ Halli halløj\
 ![](/cloud/project/results/Kmeans_plot.png){width=100%}
 
 ## Results: Binomial regression
-```{r}
+```{r, echo=FALSE}
 load("/cloud/project/results/Matrix_conf.RData")
-kable(Matrix_conf,"latex")
+kable(Matrix_conf,format = "html", digits = 3)%>%
+  kable_styling(font_size = 12)%>%
+  column_spec(1:8,width = "1.5cm")%>%
+  column_spec(9, width = "2cm")
 ```
 
 
