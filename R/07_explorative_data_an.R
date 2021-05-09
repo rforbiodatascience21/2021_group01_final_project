@@ -113,8 +113,36 @@ pltblood = Data %>% ggplot(aes(Resting_blood_pressure)) +
   theme_minimal() +
   theme(axis.title.y=element_blank())
 
+pltage = Data %>% ggplot(aes(Age)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Age") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltmax = Data %>% ggplot(aes(Maximum_heart_rate_achieved)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Maximum heart rate achieved") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltST = Data %>% ggplot(aes(ST_depression_induced_by_exercise)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "ST depression") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltnum = Data %>% ggplot(aes(Number_of_major_vessels_colored_by_flourosopy)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Major Vessels colored") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+  
 ggarrange(pltchol,                                                 
-          pltblood, 
+          pltblood,
+          pltage,
+          pltmax,
+          pltST,
+          pltnum,
           common.legend = TRUE) 
 
 ###### other 
