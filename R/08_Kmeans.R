@@ -43,20 +43,21 @@ p1
 '
 represents the variance within the clusters. It decreases as k increases
 '
-ggplot(clusterings, aes(k, tot.withinss)) +
+p2 <- ggplot(clusterings, aes(k, tot.withinss)) +
   geom_line() +
   geom_point()
-
+p2
+# k = 2
 kclust <- kmeans(km_data, centers = 2)
 kclust
 
 kclusts_final <- 
   tibble(k = 2) %>%
   mutate(
-    kclust = map(k, ~kmeans(points, .x)),
-    tidied = map(kclust, tidy),
-    glanced = map(kclust, glance),
-    augmented = map(kclust, augment, points)
+    kclusts_final = map(k, ~kmeans(km_data, .x)),
+    tidied = map(kclusts_final, tidy),
+    glanced = map(kclusts_final, glance),
+    augmented = map(kclusts_final, augment, km_data)
   )
 
 assignments_final <- 
@@ -64,9 +65,10 @@ assignments_final <-
   unnest(cols = c(augmented))
 
 #each point colored according to the predicted cluster
-p2 <- 
-  ggplot(assignments_final, aes(x =  x1, y = x2)) +
+p3 <- 
+  ggplot(assignments_final, aes(x = Age, y = Serum_cholestoral)) +
   geom_point(aes(color = .cluster), alpha = 0.8) 
+<<<<<<< HEAD
 p2
 
 # evt overlay med om der er heart disease eller ej
@@ -74,6 +76,27 @@ p2
 ggsave(PCA_plot, filename="/cloud/project/results/PCA_plot.png", width = 16, height = 9, dpi = 72)
 
 
+=======
+p3
+>>>>>>> bbeeaf4dd858bda721682da2f871b0f0bd21f825
 
 
+diagnose <- Data %>% select(Age, Serum_cholestoral, Diagnosis_of_disease ) %>% drop_na()
+assignments_final_labelled <- assignments_final %>%
+  left_join(diagnose)
 
+p4 <- 
+  ggplot(assignments_final_labelled, aes(x = Age, y = Serum_cholestoral, shape = Diagnosis_of_disease )) +
+  geom_point(aes(color = .cluster), alpha = 0.8) 
+p4
+
+##
+ggarrange(p1,                                                 # First row with scatter plot
+          ggarrange(p2, p3, ncol = 2, labels = c("B", "C")),
+          p4,
+          nrow = 3, 
+          labels = c("A","D")                                        # Labels of the scatter plot
+) 
+ggarrange(p1,p2,p3,p4,
+          nrow=2,ncol=2,
+          labels =c("A", "B", "C","D"))   
