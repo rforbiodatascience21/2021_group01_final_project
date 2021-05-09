@@ -95,12 +95,14 @@ Matrix_conf1<- Confusion_matrix(lmmodel2, Data_test)%>%
 Matrix_conf<-Matrix_conf %>%
   bind_rows(Matrix_conf1)
   
+Data <- Data %>%mutate(Predict1 = predict(lmmodel1,Data, type = "response"),
+                       Predict2 = predict(lmmodel2,Data, type = "response"),
+                       Diagnosis_of_disease_No= as_double(Diagnosis_of_disease_No)-1)
 
 Plot4 <- Data %>%
-  ggplot(aes(Age, Diagnosis_of_disease_No))+
+  ggplot(aes(Age, y=Diagnosis_of_disease_No))+
   geom_point(alpha=.5)+
-  stat_smooth(method="glm", se=FALSE, fullrange=TRUE, 
-              method.args = list(family=binomial))+
+  geom_line(aes(y=(Predict1)))+
   theme_classic()+
   theme(legend.position = "bottom")+
   labs(title = "Logistic regression model of the diagnosis of the Disease", y = "Predicted probability")
