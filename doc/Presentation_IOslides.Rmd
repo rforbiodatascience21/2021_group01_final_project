@@ -1,0 +1,38 @@
+---
+title: "Presentation"
+author: "Group_1"
+date: "9 5 2021"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+```
+
+## Introduction
+
+## Methods: data processing
+Halli halløj\
+![](/cloud/project/results/Flowchart_R_presentation.png){width=100%}
+
+## Method: Summary 1
+![](/cloud/project/results/Summary_density_plots.png){width=100%}
+
+## Method: Summary 2
+![](/cloud/project/results/Summary_bar_plots.png){width=100%}
+
+## Results: PCA analysis
+![](/cloud/project/results/PCA_plot.png){width=100%}
+
+## Results: Kmeans Cluster
+![](/cloud/project/results/Kmeans_plot.png){width=100%}
+
+## Results: Binomial regression
+```{r}
+load("/cloud/project/results/Matrix_conf.RData")
+kable(Matrix_conf,"latex")
+```
+
+
+## Discussion
