@@ -36,5 +36,5 @@ image_scale(image,"500")
 
 Slide With another plot
 ========================================================
-```{r child = "Summary_2.Rmd"}
+```{r child = "cholesterol_analysis.Rmd"}
 ```

@@ -1,10 +1,12 @@
 # Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
-
 # Load libraries ----------------------------------------------------------
 library(tidyverse)
 library(ggplot2)
+library(ggpubr)
+library(broom)  # devtools::install_github("tidymodels/broom")
+library(cowplot)
 
 # Load data ---------------------------------------------------------------
 Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
@@ -17,7 +19,6 @@ Location_cholesterol_plot <- Data_aug %>%
   ggplot(mapping = aes(x = Serum_cholestoral,
                        y = Location)) +
   geom_boxplot(aes(fill = Location)) +
-  ggtitle("Cholesterol_location plot") +
   theme_classic() +
   theme(legend.position = "none" )
 
@@ -62,11 +63,11 @@ diagnosis_string = "% of disease present\n Cleveland\t48.26%\n Hungarian\t41.67%
 # Make annotated plots
 Location_cholesterol_plot <- Location_cholesterol_plot + annotate("text", x = 550, y = 3, label = mean_string)
 Location_disease_plot <- Location_disease_plot + annotate("text", x = 100, y = 3, label = diagnosis_string)
+combined_plot <- ggarrange(Location_cholesterol_plot,Location_disease_plot)
+combined_plot
+Location_plot <- annotate_figure(combined_plot,
+                top = ("Locations relation with cholesterol and heart disease"))
 
-png(filename="/cloud/project/png_plots/Location_cholesterol_plot.png")
-plot(Location_cholesterol_plot)
-dev.off()
-
-png(filename="/cloud/project/png_plots/Location_disease_plot.png")
-plot(Location_disease_plot)
+png(filename="/cloud/project/results/Location_plot.png",width = 750, height = 500)
+plot(Location_plot)
 dev.off()

@@ -33,8 +33,7 @@ Slide With another plot
 
 
 
-I am very special, not just summary 1\
-![plot of chunk plots summary 2](presentation-figure/plots summary 2-1.png)
 
-\
-I am another plot du du du du du du
+![plot of chunk plots cholesterol-3](presentation-figure/plots cholesterol-3-1.png)
+
+![plot of chunk plots location-4](presentation-figure/plots location-4-1.png)
