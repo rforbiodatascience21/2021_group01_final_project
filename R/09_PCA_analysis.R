@@ -1,3 +1,6 @@
+# Clear workspace ---------------------------------------------------------
+rm(list = ls())
+
 library(tidyverse)
 library(ggpubr)
 library(broom)  # devtools::install_github("tidymodels/broom")
@@ -73,7 +76,8 @@ PCA_analysis<-function(data){
 
 Data <- read_tsv(file = "data/02_data.tsv.gz") %>% drop_na()
 
-PCA_analysis(Data)
+PCA_plot <- PCA_analysis(Data)
 
+ggsave(PCA_plot, filename="/cloud/project/results/PCA_plot.png", width = 16, height = 9, dpi = 72)
 
 

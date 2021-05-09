@@ -71,6 +71,8 @@ p2
 
 # evt overlay med om der er heart disease eller ej
 
+ggsave(PCA_plot, filename="/cloud/project/results/PCA_plot.png", width = 16, height = 9, dpi = 72)
+
 
 
 

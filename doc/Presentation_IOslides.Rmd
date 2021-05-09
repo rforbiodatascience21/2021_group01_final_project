@@ -7,6 +7,7 @@ output: ioslides_presentation
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
 ```
 
 ## Introduction
@@ -20,3 +21,17 @@ Halli halløj\
 
 ## Method: Summary 2
 ![](/cloud/project/results/Summary_bar_plots.png){width=100%}
+
+## Results: PCA analysis
+![](/cloud/project/results/PCA_plot.png){width=100%}
+
+## Results: Kmeans Cluster
+
+## Results: Binomial regression
+```{r}
+load("/cloud/project/results/Matrix_conf.RData")
+kable(Matrix_conf)
+```
+
+
+## Discussion
