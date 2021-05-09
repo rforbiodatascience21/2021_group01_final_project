@@ -31,7 +31,7 @@ Data_aug <- Data %>%
                                                       Resting_electrocardiographic == 2 ~ "LV hypertrophy")),
          Exercise_induced_angina_cat = factor(case_when(Exercise_induced_angina == 1 ~ "Present", 
                                                  Exercise_induced_angina == 0 ~ "Not present")),
-         slope_of_ST_cat = case_when(The_slope_of_the_peak_exercise_ST_segment == 1 ~"uplsoping",
+         slope_of_ST_cat = case_when(The_slope_of_the_peak_exercise_ST_segment == 1 ~"upsloping",
                                      The_slope_of_the_peak_exercise_ST_segment == 2 ~"flat",
                                      The_slope_of_the_peak_exercise_ST_segment == 3 ~"downsloping"),
          Thal_cat = factor(case_when(Thal == 3 ~"normal",

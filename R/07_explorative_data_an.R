@@ -37,15 +37,88 @@ Data <- Data %>%
   mutate(Sex = factor(Sex, levels =  c("0", "1")))
 
 # Sex of the patient (1 = male; 0 = female)
-datadist_sex <- Data %>% group_by(Sex) %>% 
+datadist_sex <- Data %>% group_by(Sex_cat) %>% 
   count(Diagnosis_of_disease) 
 
-Data  %>% group_by(Diagnosis_of_disease) %>% count(Sex) %>%
-  ggplot(aes(x = Sex, y=n)) +
+plot_sex = Data  %>% group_by(Diagnosis_of_disease) %>% count(Sex_cat) %>%
+  ggplot(aes(y = Sex_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
                alpha=0.2) + 
-  labs(title = "Distribution of gender w.r.t heart attack")
+  labs(x = "Sex",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_chest = Data  %>% group_by(Diagnosis_of_disease) %>% count(Chest_pain_type_cat) %>%
+  ggplot(aes(y = Chest_pain_type_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2) + 
+  labs(x = "Chest pain type",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_sugar = Data  %>% group_by(Diagnosis_of_disease) %>% count(Fasting_blood_sugar_cat) %>%
+  ggplot(aes(y = Fasting_blood_sugar_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2) + 
+  labs(x = "Fasting blood sugar",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_electro = Data  %>% group_by(Diagnosis_of_disease) %>% count(Resting_electrocardiographic_cat) %>%
+  ggplot(aes(y = Resting_electrocardiographic_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2) + 
+  labs(x = "Electrocardiographic",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_exercise = Data  %>% group_by(Diagnosis_of_disease) %>% count(Exercise_induced_angina_cat) %>%
+  ggplot(aes(y = Exercise_induced_angina_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2) + 
+  labs(x = "Exercise induced angina",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_ST = Data  %>% group_by(Diagnosis_of_disease) %>% count(slope_of_ST_cat) %>%
+  ggplot(aes(y = slope_of_ST_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2) + 
+  labs(x = "Slope of ST",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_Thal = Data  %>% group_by(Diagnosis_of_disease) %>% count(Thal_cat) %>%
+  ggplot(aes(y = Thal_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2) + 
+  labs(x = "Thal",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+ggarrange(plot_sex,                                                 
+          plot_chest,
+          plot_sugar,
+          plot_electro,
+          plot_exercise,
+          plot_ST,
+          plot_Thal,
+          common.legend = TRUE) 
+
 
 # Sex vs heart attack 
 datadist_sex_present <- Data %>% filter(Diagnosis_of_disease =="Present") %>%
