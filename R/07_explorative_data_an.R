@@ -1,7 +1,11 @@
-
 Data <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 ### Exploratory Data Analysis -------------------------------------------------
+library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+library(broom)
+library(cowplot)
 
 #Checking the Data Distribution
 
@@ -100,17 +104,57 @@ ggarrange(pltbox,
 # heart attack distribution over cholesterole 
 pltchol = Data %>% ggplot(aes(Serum_cholestoral)) + 
   geom_density(aes(color = Diagnosis_of_disease, fill = Diagnosis_of_disease),alpha=0.2) + 
-  labs(x = "Serum cholesterole", y = "Density") + 
+  labs(x = "Serum Cholestoral",
+       color = "Diagnosis",
+       fill = "Diagnosis") + 
   theme_minimal()
 
 pltblood = Data %>% ggplot(aes(Resting_blood_pressure)) + 
   geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
-  labs(x = "Resting blood pressure") +
+  labs(x = "Resting blood pressure",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
   theme_minimal() +
   theme(axis.title.y=element_blank())
 
+pltage = Data %>% ggplot(aes(Age)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Age",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltmax = Data %>% ggplot(aes(Maximum_heart_rate_achieved)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Maximum heart rate achieved",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltST = Data %>% ggplot(aes(ST_depression_induced_by_exercise)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "ST depression",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltnum = Data %>% ggplot(aes(Number_of_major_vessels_colored_by_flourosopy)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Major vessels colored",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+  
 ggarrange(pltchol,                                                 
-          pltblood, 
+          pltblood,
+          pltage,
+          pltmax,
+          pltST,
+          pltnum,
           common.legend = TRUE) 
 
 ###### other 
