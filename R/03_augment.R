@@ -46,7 +46,8 @@ Data_aug <- Data %>%
                    70 <= Age & Age < 80 ~ "70-80",
                    80 <= Age ~ "80<")),
          id = row_number(),
-         diagnosis_of_heart_disease=factor(diagnosis_of_heart_disease))
+         Diagnosis_of_disease_No=case_when(diagnosis_of_heart_disease == 0 ~ 0, 
+                                           diagnosis_of_heart_disease >= 1 ~ 1))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = Data_aug,
