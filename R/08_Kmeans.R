@@ -1,4 +1,13 @@
+# Clear workspace ---------------------------------------------------------
+rm(list = ls())
+
+library(tidyverse)
+library(ggpubr)
+library(broom)  # devtools::install_github("tidymodels/broom")
+library(cowplot)
 library(tidymodels)
+
+Data <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 '
 This algorithm can only deal with numeric data as it calculates distances from centroids.
@@ -68,18 +77,9 @@ assignments_final <-
 p3 <- 
   ggplot(assignments_final, aes(x = Age, y = Serum_cholestoral)) +
   geom_point(aes(color = .cluster), alpha = 0.8) 
-<<<<<<< HEAD
-p2
+p3
 
 # evt overlay med om der er heart disease eller ej
-
-ggsave(PCA_plot, filename="/cloud/project/results/PCA_plot.png", width = 16, height = 9, dpi = 72)
-
-
-=======
-p3
->>>>>>> bbeeaf4dd858bda721682da2f871b0f0bd21f825
-
 
 diagnose <- Data %>% select(Age, Serum_cholestoral, Diagnosis_of_disease ) %>% drop_na()
 assignments_final_labelled <- assignments_final %>%
@@ -97,6 +97,8 @@ ggarrange(p1,                                                 # First row with s
           nrow = 3, 
           labels = c("A","D")                                        # Labels of the scatter plot
 ) 
-ggarrange(p1,p2,p3,p4,
+Kmeans_plot <- ggarrange(p1,p2,p3,p4,
           nrow=2,ncol=2,
           labels =c("A", "B", "C","D"))   
+
+ggsave(Kmeans_plot, filename="/cloud/project/results/Kmeans_plot.png", width = 16, height = 9, dpi = 72)
