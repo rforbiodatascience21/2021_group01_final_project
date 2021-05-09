@@ -66,6 +66,8 @@ Data_model <- Data %>%
 Data_test <- Data %>%
   anti_join(Data_model, by="id")
 
+set.seed(365)
+
 lmmodel1 <- Data_model %>%
   glm(formula =  Diagnosis_of_disease_No~ Age,
       family = binomial())
