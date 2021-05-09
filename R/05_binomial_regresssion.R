@@ -31,7 +31,7 @@ Plot1 <- Data %>%
   facet_grid(~ diagnosis_of_heart_disease)+
   theme_classic()+
   theme(legend.position = "bottom")+
-  labs(color="Location")
+  labs(color="Location", title = "Density plot of the age distribution for each decree of heart disease", subtitle = "0 corresponse to no degree of heart disease" )
 
 
 Plot2 <- Data %>%
@@ -65,6 +65,8 @@ Data_model <- Data %>%
 
 Data_test <- Data %>%
   anti_join(Data_model, by="id")
+
+set.seed(365)
 
 lmmodel1 <- Data_model %>%
   glm(formula =  Diagnosis_of_disease_No~ Age,
