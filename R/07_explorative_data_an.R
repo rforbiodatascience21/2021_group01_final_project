@@ -1,7 +1,11 @@
-
 Data <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 ### Exploratory Data Analysis -------------------------------------------------
+library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+library(broom)
+library(cowplot)
 
 #Checking the Data Distribution
 
@@ -33,15 +37,98 @@ Data <- Data %>%
   mutate(Sex = factor(Sex, levels =  c("0", "1")))
 
 # Sex of the patient (1 = male; 0 = female)
-datadist_sex <- Data %>% group_by(Sex) %>% 
+datadist_sex <- Data %>% group_by(Sex_cat) %>% 
   count(Diagnosis_of_disease) 
 
-Data  %>% group_by(Diagnosis_of_disease) %>% count(Sex) %>%
-  ggplot(aes(x = Sex, y=n)) +
+plot_sex = Data  %>% group_by(Diagnosis_of_disease) %>% count(Sex_cat) %>%
+  ggplot(aes(y = Sex_cat, x=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-               alpha=0.2) + 
-  labs(title = "Distribution of gender w.r.t heart attack")
+               alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Sex",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_chest = Data  %>% group_by(Diagnosis_of_disease) %>% count(Chest_pain_type_cat) %>%
+  ggplot(aes(y = Chest_pain_type_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Chest pain type",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_sugar = Data  %>% group_by(Diagnosis_of_disease) %>% count(Fasting_blood_sugar_cat) %>%
+  ggplot(aes(y = Fasting_blood_sugar_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Fasting blood sugar",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_electro = Data  %>% group_by(Diagnosis_of_disease) %>% count(Resting_electrocardiographic_cat) %>%
+  ggplot(aes(y = Resting_electrocardiographic_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Electrocardiographic",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_exercise = Data  %>% group_by(Diagnosis_of_disease) %>% count(Exercise_induced_angina_cat) %>%
+  ggplot(aes(y = Exercise_induced_angina_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Exercise induced angina",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_ST = Data  %>% group_by(Diagnosis_of_disease) %>% count(slope_of_ST_cat) %>%
+  ggplot(aes(y = slope_of_ST_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Slope of ST",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_Thal = Data  %>% group_by(Diagnosis_of_disease) %>% count(Thal_cat) %>%
+  ggplot(aes(y = Thal_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Thal",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+Summary_bar = ggarrange(plot_sex,                                                 
+          plot_chest,
+          plot_sugar,
+          plot_electro,
+          plot_exercise,
+          plot_ST,
+          plot_Thal,
+          common.legend = TRUE) 
+
+png(filename="/cloud/project/results/Summary_bar_plots.png", width = 1000, height = 600)
+plot(Summary_bar)
+dev.off()
 
 # Sex vs heart attack 
 datadist_sex_present <- Data %>% filter(Diagnosis_of_disease =="Present") %>%
@@ -71,7 +158,7 @@ pltbox = Data %>%
                        fill = Diagnosis_of_disease)) + 
   geom_boxplot() + 
   xlim(0,80) +
-  labs(x = "Age", y=" ") + 
+  labs(x = "Age", y="") + 
   theme_minimal() + 
   theme(axis.title=element_blank(), 
         axis.text.y=element_blank()) + 
@@ -100,18 +187,62 @@ ggarrange(pltbox,
 # heart attack distribution over cholesterole 
 pltchol = Data %>% ggplot(aes(Serum_cholestoral)) + 
   geom_density(aes(color = Diagnosis_of_disease, fill = Diagnosis_of_disease),alpha=0.2) + 
-  labs(x = "Serum cholesterole", y = "Density") + 
+  labs(x = "Serum Cholestoral",
+       color = "Diagnosis",
+       fill = "Diagnosis") + 
   theme_minimal()
 
 pltblood = Data %>% ggplot(aes(Resting_blood_pressure)) + 
   geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
-  labs(x = "Resting blood pressure") +
+  labs(x = "Resting blood pressure",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
   theme_minimal() +
   theme(axis.title.y=element_blank())
 
-ggarrange(pltchol,                                                 
-          pltblood, 
+pltage = Data %>% ggplot(aes(Age)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Age",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltmax = Data %>% ggplot(aes(Maximum_heart_rate_achieved)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Maximum heart rate achieved",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltST = Data %>% ggplot(aes(ST_depression_induced_by_exercise)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "ST depression",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltnum = Data %>% ggplot(aes(Number_of_major_vessels_colored_by_flourosopy)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Major vessels colored",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+  
+Summary_density = ggarrange(pltchol,                                                 
+          pltblood,
+          pltage,
+          pltmax,
+          pltST,
+          pltnum,
           common.legend = TRUE) 
+
+png(filename="/cloud/project/results/Summary_density_plots.png", width = 1000, height = 600)
+plot(Summary_density)
+dev.off()
 
 ###### other 
 Data = Data %>% 

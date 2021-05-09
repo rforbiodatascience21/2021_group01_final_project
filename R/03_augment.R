@@ -21,7 +21,7 @@ Data_aug <- Data %>%
          Sex_cat = factor(case_when(Sex == 0 ~ "Female", 
                              Sex == 1 ~ "Male")),
          Chest_pain_type_cat = factor(case_when(Chest_pain_type == 1 ~ "typical", 
-                                         Chest_pain_type == 2 ~ "atypcal",
+                                         Chest_pain_type == 2 ~ "atypical",
                                          Chest_pain_type == 3 ~ "non-anginal",
                                          Chest_pain_type == 4 ~ "asymptomatic")),
          Fasting_blood_sugar_cat = factor(case_when(Fasting_blood_sugar == 0 ~ "Low", 
@@ -31,7 +31,7 @@ Data_aug <- Data %>%
                                                       Resting_electrocardiographic == 2 ~ "LV hypertrophy")),
          Exercise_induced_angina_cat = factor(case_when(Exercise_induced_angina == 1 ~ "Present", 
                                                  Exercise_induced_angina == 0 ~ "Not present")),
-         slope_of_ST_cat = case_when(The_slope_of_the_peak_exercise_ST_segment == 1 ~"uplsoping",
+         slope_of_ST_cat = case_when(The_slope_of_the_peak_exercise_ST_segment == 1 ~"upsloping",
                                      The_slope_of_the_peak_exercise_ST_segment == 2 ~"flat",
                                      The_slope_of_the_peak_exercise_ST_segment == 3 ~"downsloping"),
          Thal_cat = factor(case_when(Thal == 3 ~"normal",
@@ -46,7 +46,8 @@ Data_aug <- Data %>%
                    70 <= Age & Age < 80 ~ "70-80",
                    80 <= Age ~ "80<")),
          id = row_number(),
-         diagnosis_of_heart_disease=factor(diagnosis_of_heart_disease))
+         Diagnosis_of_disease_No=case_when(diagnosis_of_heart_disease == 0 ~ 0, 
+                                           diagnosis_of_heart_disease >= 1 ~ 1))
 
 # Write data --------------------------------------------------------------
 write_tsv(x = Data_aug,

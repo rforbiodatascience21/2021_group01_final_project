@@ -13,19 +13,29 @@ library("rlang")
 
 
 # Load data ---------------------------------------------------------------
-Data <- read_tsv(file = "data/03_data_aug.tsv.gz")
+Data <- read_tsv(file = "data/03_data_aug.tsv.gz", col_types = cols(.default = col_double(),
+                                                        Location = col_factor(),
+                                                        Diagnosis_of_disease = col_factor(),
+                                                        Sex_cat = col_factor(),
+                                                        Chest_pain_type_cat = col_factor(),
+                                                        Fasting_blood_sugar_cat = col_factor(),
+                                                        Resting_electrocardiographic_cat = col_factor(),
+                                                        Exercise_induced_angina_cat = col_factor(),
+                                                        slope_of_ST_cat = col_factor(),
+                                                        Thal_cat = col_factor(),
+                                                        Age_class = col_factor()))
 
 Plot1 <- Data %>%
-  ggplot(aes(Age, fill = as.factor(Location)))+
+  ggplot(aes(Age, fill = Location))+
   geom_density(alpha=0.5)+
   facet_grid(~ diagnosis_of_heart_disease)+
   theme_classic()+
   theme(legend.position = "bottom")+
-  labs(color="Location")
+  labs(color="Location", title = "Density plot of the age distribution for each decree of heart disease", subtitle = "0 corresponse to no degree of heart disease" )
 
 
 Plot2 <- Data %>%
-  ggplot(aes(Age, fill = as.factor(Location)))+
+  ggplot(aes(Age, fill = Location))+
   geom_histogram(position="dodge",binwidth = 5)+
   facet_grid(~ diagnosis_of_heart_disease)+
   theme_classic()+
@@ -34,7 +44,7 @@ Plot2 <- Data %>%
 
 
 Plot3 <- Data %>%
-  ggplot(aes(Age, fill = as.factor(Location)))+
+  ggplot(aes(Age, fill = Location))+
   geom_density(alpha=0.5)+
   facet_grid(~ Diagnosis_of_disease)+
   theme_classic()+
@@ -45,26 +55,25 @@ Plot3 <- Data %>%
 
 #To get around the problem with the different data sizes, 
 # we remove the rows containing NA
-
 Data <- Data %>%
-  mutate(id = row_number(),
-         Diagnosis_of_disease_No = case_when(Diagnosis_of_disease == "Present" ~ 1, Diagnosis_of_disease == "Not present" ~ 0))
+  mutate(Diagnosis_of_disease_No=factor(Diagnosis_of_disease_No))%>%
+  select(Diagnosis_of_disease_No,Age,Sex,Chest_pain_type, id) %>%
+  na.omit()
 
 Data_model <- Data %>%
-  na.omit(Age+Sex+Chest_pain_type) %>%
-  select(is.numeric) %>%
-  select(!diagnosis_of_heart_disease) %>%
   sample_frac(.70)
 
 Data_test <- Data %>%
-  na.omit(Age+Sex+Chest_pain_type) %>%
-  select(is.numeric) %>%
-  select(!diagnosis_of_heart_disease) %>%
   anti_join(Data_model, by="id")
 
+set.seed(365)
+
 lmmodel1 <- Data_model %>%
-  glm(formula = Diagnosis_of_disease_No ~ Age,
+  glm(formula =  Diagnosis_of_disease_No~ Age,
       family = binomial())
+tidy(lmmodel1)
+AIC(lmmodel1)
+
 
 lmmodel2 <- Data_model %>%
   glm(formula = Diagnosis_of_disease_No ~ Age+Sex+Chest_pain_type,
