@@ -117,7 +117,7 @@ plot_Thal = Data  %>% group_by(Diagnosis_of_disease) %>% count(Thal_cat) %>%
        color = "Diagnosis of disease",
        fill = "Diagnosis of disease")
 
-ggarrange(plot_sex,                                                 
+Summary_bar = ggarrange(plot_sex,                                                 
           plot_chest,
           plot_sugar,
           plot_electro,
@@ -126,6 +126,9 @@ ggarrange(plot_sex,
           plot_Thal,
           common.legend = TRUE) 
 
+png(filename="/cloud/project/results/Summary_bar_plots.png")
+plot(Summary_bar)
+dev.off()
 
 # Sex vs heart attack 
 datadist_sex_present <- Data %>% filter(Diagnosis_of_disease =="Present") %>%
@@ -229,13 +232,17 @@ pltnum = Data %>% ggplot(aes(Number_of_major_vessels_colored_by_flourosopy)) +
   theme_minimal() +
   theme(axis.title.y=element_blank())
   
-ggarrange(pltchol,                                                 
+Summary_density = ggarrange(pltchol,                                                 
           pltblood,
           pltage,
           pltmax,
           pltST,
           pltnum,
           common.legend = TRUE) 
+
+png(filename="/cloud/project/results/Summary_density_plots.png")
+plot(Summary_density)
+dev.off()
 
 ###### other 
 Data = Data %>% 
