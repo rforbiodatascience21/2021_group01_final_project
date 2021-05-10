@@ -3,7 +3,6 @@ title: "Presentation"
 author: "Group_1"
 date: "9 5 2021"
 output: ioslides_presentation
-
 ---
 
 ```{r setup, include=FALSE}
@@ -14,9 +13,9 @@ library(tidyverse)
 ```
 
 ## Introduction
-Features in  study by xx et. al 
+<font size = "3">Features in  study by xx et. al 
 - Data was pulled on 27. april 2021 and is available at: xx
-- Contains information of heart patients from 4 locations: Cleveland, Hungary, Switzerland and Long Beach  
+- Contains information of heart patients from 4 locations: Cleveland, Hungary, Switzerland and Long Beach </font>
 
 ## Goal of study
 - Perform visual analysis of data distribution
