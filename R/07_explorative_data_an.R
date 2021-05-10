@@ -168,7 +168,8 @@ age_class <- Data  %>% group_by(Diagnosis_of_disease)  %>% count(Age_class) %>%
   ggplot(aes(x = Age_class, y=n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.5) +
+           alpha=0.5,
+           position = "dodge") +
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
 
