@@ -100,8 +100,7 @@ rotation_matrix <- data_pca %>%
     hjust = 1, nudge_x = -0.02, 
     color ="#904C2F"
   ) +
-  xlim(-2, 1) + ylim(-0.35, 0.8) +
-  coord_fixed() + # fix aspect ratio to 1:1
+  xlim(-1.2, 0.5) + ylim(-0.35, 0.8) +
   labs(title = "Rotation matrix") +
   theme_minimal_grid(12) 
 
@@ -120,7 +119,8 @@ plot_pca <- data_pca_aug %>%
              colour = Diagnosis_of_disease)) +
 
   geom_point(size = 1.5) + 
-  labs(title = "Principal components") + 
+  labs(title = "Principal components",
+       color = "Diagnosis") + 
   geom_point(size = 1.5) +
   scale_color_viridis(discrete = TRUE)
 
