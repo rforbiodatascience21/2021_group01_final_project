@@ -10,20 +10,21 @@ source(file = "R/99_functions.R")
 library("tidyverse")
 library("broom")
 library("rlang")
+library("viridis")
 
 
 # Load data ---------------------------------------------------------------
 Data <- read_tsv(file = "data/03_data_aug.tsv.gz", col_types = cols(.default = col_double(),
-                                                        Location = col_factor(),
-                                                        Diagnosis_of_disease = col_factor(),
-                                                        Sex_cat = col_factor(),
-                                                        Chest_pain_type_cat = col_factor(),
-                                                        Fasting_blood_sugar_cat = col_factor(),
-                                                        Resting_electrocardiographic_cat = col_factor(),
-                                                        Exercise_induced_angina_cat = col_factor(),
-                                                        slope_of_ST_cat = col_factor(),
-                                                        Thal_cat = col_factor(),
-                                                        Age_class = col_factor()))
+                                                        Location = col_character(),
+                                                        Diagnosis_of_disease = col_character(),
+                                                        Sex_cat = col_character(),
+                                                        Chest_pain_type_cat = col_character(),
+                                                        Fasting_blood_sugar_cat = col_character(),
+                                                        Resting_electrocardiographic_cat = col_character(),
+                                                        Exercise_induced_angina_cat = col_character(),
+                                                        slope_of_ST_cat = col_character(),
+                                                        Thal_cat = col_character(),
+                                                        Age_class = col_character()))
 
 Plot1 <- Data %>%
   ggplot(aes(Age, fill = Location))+
@@ -31,16 +32,19 @@ Plot1 <- Data %>%
   facet_grid(~ diagnosis_of_heart_disease)+
   theme_classic()+
   theme(legend.position = "bottom")+
-  labs(color="Location", title = "Density plot of the age distribution for each decree of heart disease", subtitle = "0 corresponse to no degree of heart disease" )
-
+  labs(color="Location", title = "Density plot of the age distribution for each decree of heart disease", subtitle = "0 corresponse to no degree of heart disease" ) +
+  scale_color_viridis(discrete=TRUE) +
+  scale_fill_viridis(discrete=TRUE)
 
 Plot2 <- Data %>%
   ggplot(aes(Age, fill = Location))+
-  geom_histogram(position="dodge",binwidth = 5)+
+  geom_histogram(position="dodge",binwidth = 5,alpha = 0.5)+
   facet_grid(~ diagnosis_of_heart_disease)+
   theme_classic()+
   theme(legend.position = "bottom")+
-  labs(color="Location")
+  labs(color="Location") +
+  scale_color_viridis(discrete=TRUE) +
+  scale_fill_viridis(discrete=TRUE)
 
 
 Plot3 <- Data %>%
@@ -49,7 +53,9 @@ Plot3 <- Data %>%
   facet_grid(~ Diagnosis_of_disease)+
   theme_classic()+
   theme(legend.position = "bottom")+
-  labs(color="Location")
+  labs(color="Location") +
+  scale_color_viridis(discrete=TRUE) +
+  scale_fill_viridis(discrete=TRUE)
 
 # Data wrangling ---------------------------------------------------------------
 
@@ -105,7 +111,9 @@ Plot4 <- Data %>%
   geom_line(aes(y=(Predict1)))+
   theme_classic()+
   theme(legend.position = "bottom")+
-  labs(title = "Logistic regression model of the diagnosis of the Disease", y = "Predicted probability")
+  labs(title = "Logistic regression model of the diagnosis of the Disease", y = "Predicted probability") +
+  scale_color_viridis(discrete=TRUE) +
+  scale_fill_viridis(discrete=TRUE)
 
 
 # Write data --------------------------------------------------------------
