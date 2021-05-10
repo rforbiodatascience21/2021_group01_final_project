@@ -73,52 +73,38 @@ data_raw <- read_csv("../data/_raw/processed.cleveland.data")
 head(data_raw, 4) %>% select(1:9)
 ```
 ## All included variables
-<font size = "2">
+<font size = "1">
 1. The age of the participates in the study in years    
 2. The gender of the  participates
-
-    * 0 = female, * 1 = male
-
+    0 = female, 1 = male
 3. The type of chest pain
-
-    * 1 = typical angina, * 2 = atypical angina, * 3 = non-anginal pain, * 4 = asymptomatic
-
+    1 = typical angina, 2 = atypical angina, 3 = non-anginal pain, 4 = asymptomatic
 4. The resting blood pressure in mm Hg on admission to the hospital  
-
 5. The serum cholestoral in $\frac{mg}{dl}$    
-
 6. The fasting blood sugar
-
-    * 0 = fasting blood sugar $< 120 \frac{mg}{dl}$, * 1 = fasting blood sugar $> 120 \frac{mg}{dl}$
-
+    0 = fasting blood sugar $< 120 \frac{mg}{dl}$, 1 = fasting blood sugar $> 120 \frac{mg}{dl}$
 7. The result of the resting electrocardiographic
-
-    * 0 = normal, * 1 = ST  and/or T wave abnormality, * 2 = showing probable or definite left ventricular hypertrophy
-
+    
+    0 = normal, 1 = ST  and/or T wave abnormality, 2 = showing probable or definite left ventricular hypertrophy
 8. The maximum heart rate achieved   
-
 9. Exercise induced angina
-
-    * 1 = yes, * 0 = no
-
+    
+    1 = yes, 0 = no
 10. ST depression induced by exercise relative to resting stage   
-
 11. The slope of the peak exercise ST segment
-
-    * 1 = upsloping, * 2 = flat, * 3 = downsloping
-
+    
+    1 = upsloping, 2 = flat, 3 = downsloping
 12. The number of major vessels colored by flourosopy
-
-    * $0\leq Major\ vessels\leq 3$
-
+    
+    $0\leq Major\ vessels\leq 3$
 13. The defect type of thalassemia
-
-    * 3 = normal, * 6 = fixed defect, * 7 = reversable defect
-
+    
+    3 = normal, 6 = fixed defect, 7 = reversable defect
 14. The diagnosis of heart disease
-
-    * 0 = no heart disease present, * [1;4] = types of heart disease 
+    
+    0 = no heart disease present, [1;4] = types of heart disease 
 </font>
+
 ## Data Cleaning 
 - <font size = "4"> Joined together the 4 data frames - Handling of missing values </font>
 ![](/cloud/project/results/04_NA_Bar.png){width=100%}
