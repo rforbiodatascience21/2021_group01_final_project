@@ -1,8 +1,10 @@
 # Clear workspace ---------------------------------------------------------
 rm(list = ls())
-
-library(broom)
 library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+library(broom)
+library(cowplot)
 library(viridis)
 
 # Functions ---------------------------------------------------------------
@@ -72,13 +74,14 @@ eigenvalues_plot <- data_pca %>%
              fill = PC,
              color = PC)) +
   geom_col(alpha = 0.5) + 
-  labs(title = "Amount of total variance explained by PCs")+ 
+  labs(title = "Amount of total variance explained 
+       by PCs")+ 
   theme(legend.position = "none") +
   scale_fill_viridis() +
   scale_color_viridis()
 
-ggsave("results/08_eigenvalues_plot.png", plot = eigenvalues_plot, 
-       device = "png")
+#ggsave("results/08_eigenvalues_plot.png", plot = eigenvalues_plot, 
+#       device = "png")
 
 # define arrow style for plotting
 arrow_style <- arrow(
@@ -96,13 +99,13 @@ rotation_matrix <- data_pca %>%
     hjust = 1, nudge_x = -0.02, 
     color ="#904C2F"
   ) +
-  xlim(-1.7, .5) + ylim(-.3, 1) +
+  xlim(-5, 1) + ylim(-.3, 1) +
   coord_fixed() + # fix aspect ratio to 1:1
   labs(title = "Rotation matrix") +
   theme_minimal_grid(12) 
 
-ggsave("results/08_rotation_matrix.png", plot = eigenvalues_plot, 
-       device = "png")
+#ggsave("results/08_rotation_matrix.png", plot = eigenvalues_plot, 
+#       device = "png")
 
 # Augment to add original dataset back in
 data_pca_aug <- data_pca %>% 
@@ -116,12 +119,17 @@ plot_pca <- data_pca_aug %>%
              colour = Diagnosis_of_disease)) +
 
   geom_point(size = 1.5) + 
-  labs(title = "Principal components") 
+  labs(title = "Principal components") + 
   geom_point(size = 1.5) +
   scale_color_viridis(discrete = TRUE)
 
 # Save plot as png
-ggsave("results/08_plot_pca.png", plot = plot_pca, device = "png")
+#ggsave("results/08_plot_pca.png", plot = plot_pca, device = "png")
+
+pca_combined <- ggarrange(ggarrange(eigenvalues_plot, 
+          plot_pca, common.legend = FALSE), 
+          rotation_matrix, ncol=1, nrow=2, common.legend = FALSE)
+ggsave("results/08_pca_combined.png", plot = pca_combined, device = "png")
 
 # K-means -----------------------------------------------------------------
 
@@ -144,7 +152,7 @@ kmeans <- data_kmeans_aug %>%
   scale_color_viridis(discrete = TRUE)
 
 # Save plot as png
-ggsave("results/08_kmeans.png", device = "png")
+#ggsave("results/08_kmeans.png", device = "png")
 
 
 # seperation of class 
@@ -158,13 +166,18 @@ dist_cluster <- data_kmeans_aug %>%
            position = "dodge", 
            width = 0.5,
            alpha = 0.5) + 
-  labs(title = "Distribution of presence of disease w.r.t assigned cluster") +
+  labs(title = "Distribution of presence of disease 
+       w.r.t assigned cluster") +
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
 
 # Save plot as png
-ggsave("results/08_kmeans_dist.png", device = "png")
+#ggsave("results/08_kmeans_dist.png", device = "png")
 
+k_means_combined <- ggarrange(kmeans, dist_cluster, nrow=1, ncol=2)
+ggsave("results/08_kmeans.png", plot=k_means_combined, device = "png")
+
+# create confusion matrix 
 Data <- data_kmeans_aug %>%
   mutate(Predict = case_when(Cluster == 1 ~ 0, Cluster == 2 ~1),
          Diagnosis_of_disease_No=case_when(diagnosis_of_heart_disease == 0 ~ 0, 
