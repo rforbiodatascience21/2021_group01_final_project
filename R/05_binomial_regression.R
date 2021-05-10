@@ -110,8 +110,8 @@ Plot4 <- Data %>%
 
 # Write data --------------------------------------------------------------
 save(x = Matrix_conf,
-          file = "results/Matrix_conf.RData")
-ggsave(Plot1, filename = "results/07_plot_density_of_disease.png", width = 16, height = 9, dpi = 72)
-ggsave(Plot2, filename = "results/07_plot_histogram_of_disease.png", width = 16, height = 9, dpi = 72)
-ggsave(Plot3, filename = "results/07_plot_density_of_disease_mutated.png", width = 16, height = 9, dpi = 72)
-ggsave(Plot4, filename = "results/07_plot_binomial_regression.png", width = 16, height = 9, dpi = 72)
+          file = "results/05_Matrix_conf.RData")
+ggsave(Plot1, filename = "results/05_plot_density_of_disease.png", width = 16, height = 9, dpi = 72)
+ggsave(Plot2, filename = "results/05_plot_histogram_of_disease.png", width = 16, height = 9, dpi = 72)
+ggsave(Plot3, filename = "results/05_plot_density_of_disease_mutated.png", width = 16, height = 9, dpi = 72)
+ggsave(Plot4, filename = "results/05_plot_binomial_regression.png", width = 16, height = 9, dpi = 72)
