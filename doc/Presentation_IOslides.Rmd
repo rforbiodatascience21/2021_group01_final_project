@@ -128,6 +128,16 @@ kable(Summary_table,format = "html", digits = 3)%>%
 - Handling of NA and selection of data 
 - Performed on PCA data   
 ![](/cloud/project/results/08_kmeans.png){width=50%}
+```{r, echo=FALSE}
+load("/cloud/project/results/08_Matrix_conf.RData")
+Matrix_conf2 <- Matrix_conf2 %>%
+  select(Model_formular,`True Positive`,`False Positive`,`False Negative`,`True Negative`)
+Matrix <- Matrix_conf %>%
+  select(Model_formular,accuracy,Precision,Recall,F_score)
+
+kable(Matrix_conf1,format = "html", digits = 3)%>%
+  kable_styling(font_size = 14)
+```
 
 ![](/cloud/project/results/08_kmeans_dist.png){width=50%}
 
