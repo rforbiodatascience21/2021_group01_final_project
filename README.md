@@ -5,6 +5,19 @@ Group 1
 
 ## Description
 
+This project does different R analysis on the heart data set:
+<https://archive.ics.uci.edu/ml/datasets/Heart+Disease?fbclid=IwAR3SbR6Eo3ow8dYal4mTv321XOUAUg8yw5g_WY-eDz9hUQS_0jJ0-qTR9v8>
+This data set is collected from people that have suspected heart issues
+in Long Beach, Hungary, Cleveland and Switzerland. A total of 920
+patients and 14 variables with location information was used.
+
+Datasets from all four countries are included in our analysis. Before
+using the data, our R script joins all the datasets cleans it, and
+augments it using tidyverse methods (scripts 02\_clean.R and
+03\_augment.R). This data is used in different analysis that creates
+plots which are converted into png files and loaded into an R markdown
+IO slides presentation.
+
 Let people know what your project can do specifically. Provide context
 and add a link to any reference visitors might be unfamiliar with. A
 list of Features or a Background subsection can also be added here. If
@@ -89,6 +102,33 @@ Attribute Information:
 
 ## Installation
 
+In order to get the all the project files clone the following repository
+from git: git clone
+<https://github.com/rforbiodatascience21/2021_group01_final_project>
+
+## Software:
+
+The following software needs to be installed for running the code
+locally:
+
+-   R
+
+For running non-local, an Rstudio Cloud session can be used:
+<https://rstudio.cloud/>
+
+## Requirements
+
+The following packages needs to be installed inside R for the scripts to
+function:
+
+-   library(tidyverse)
+-   library(ggplot2)
+-   library(ggpubr)
+-   library(broom)
+-   library(cowplot)
+-   library(GGally)
+-   library(rlang)
+
 Within a particular ecosystem, there may be a common way of installing
 things, such as using Yarn, NuGet, or Homebrew. However, consider the
 possibility that whoever is reading your README is a novice and would
@@ -99,6 +139,11 @@ version or operating system or has dependencies that have to be
 installed manually, also add a Requirements subsection.
 
 ## Usage
+
+Make sure that in an R session, the project files are all cloned and
+every requirement is installed. Run the 00\_doit.R script found under
+the “R” folder. This will run all necessary scripts to make the raw data
+into png files and generate the presentation document.
 
 Use examples liberally, and show the expected output if you can. It’s
 helpful to have inline the smallest example of usage that you can
