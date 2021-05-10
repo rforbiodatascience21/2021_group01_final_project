@@ -45,22 +45,22 @@ So, the dataset is balanced.
 '
 
 # Distribution of Sex with respect to Heart Disease
-Data <- Data %>%
-  mutate(Sex = factor(Sex, levels =  c("0", "1")))
-
 # Sex vs heart attack 
 datadist_sex_present <- Data %>% filter(Diagnosis_of_disease == "Present") %>%
-  group_by(Sex) %>% 
+  group_by(Sex_cat) %>% 
   summarise(Percentage = n()) %>% 
   mutate(Percentage = Percentage/sum(Percentage)*100) 
 
 sex_present_plt <- Data  %>% filter(Diagnosis_of_disease == "Present") %>% 
-  count(Sex) %>%
-  ggplot(aes(x = n, y = Sex)) +
-  geom_col(aes(color = Sex,
-               fill = Sex),
-           alpha=0.5) + 
-  labs(title = "Gender vs. heart attack") +
+  count(Sex_cat) %>%
+  ggplot(aes(x = n, y = Sex_cat,
+             color = Sex_cat,
+             fill = Sex_cat)) +
+  geom_col(alpha=0.5) + 
+  labs(title = "Gender vs. heart attack",
+       y = "Sex",
+       fill = "Sex",
+       color = "Sex") +
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
 
@@ -69,14 +69,14 @@ sex_annotated <- sex_present_plt +
            x = 500, 
            y = 2, 
            label = datadist_sex_present %>% 
-             filter(Sex == "1") %>% 
+             filter(Sex_cat == "Male") %>% 
              select(Percentage) %>% 
              round(2)) + 
   annotate("text", 
            x = 500, 
            y = 1, 
            label = datadist_sex_present %>% 
-             filter(Sex == "0") %>% 
+             filter(Sex_cat == "Female") %>% 
              select(Percentage) %>% 
              round(2))
 
@@ -176,8 +176,9 @@ ggsave(age_class, filename="/cloud/project/results/07_age_class.png", width = 16
 #### 
 #Checking the distribution of Chest Pain with respect to Heart Disease
 
-chest_dist_plt <- Data  %>% group_by(Diagnosis_of_disease) %>% count(Chest_pain_type) %>%
-  ggplot(aes(x = Chest_pain_type, y=n, 
+chest_dist_plt <- Data  %>% group_by(Diagnosis_of_disease) %>% 
+  count(Chest_pain_type_cat) %>%
+  ggplot(aes(x = Chest_pain_type_cat, y=n, 
              fill = Diagnosis_of_disease,
              color = Diagnosis_of_disease)) +
   geom_bar(stat = "identity", position = "dodge", width = 0.5,
@@ -230,7 +231,7 @@ Not present            290
 Present                296
 '
 
-sex_v_cholestoral <- Data %>% ggplot(mapping = aes(x = Sex,
+sex_v_cholestoral <- Data %>% ggplot(mapping = aes(x = Sex_cat,
                               y = Serum_cholestoral,
                               fill = Diagnosis_of_disease)) + 
   geom_boxplot(alpha = 0.5) +
