@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Description
 This project does different R analysis on the heart data set:
 https://archive.ics.uci.edu/ml/datasets/Heart+Disease?fbclid=IwAR3SbR6Eo3ow8dYal4mTv321XOUAUg8yw5g_WY-eDz9hUQS_0jJ0-qTR9v8
+The data set was pulled 27. April 2021 by our group.
 This data set is collected from people that have suspected heart issues in Long Beach, Hungary, Cleveland and Switzerland. A total of 920 patients and 14 variables with location information was used.
 
 Datasets from all four countries are included in our analysis. Before using the data, our R script joins all the datasets cleans it, and augments it using tidyverse methods (scripts 02_clean.R and 03_augment.R). This data is used in different analysis that creates plots which are converted into png files and loaded into an R markdown IO slides presentation.
