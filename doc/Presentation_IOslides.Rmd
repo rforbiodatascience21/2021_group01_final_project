@@ -104,8 +104,15 @@ kable(Matrix,format = "html", digits = 3)%>%
   kable_styling(font_size = 14)
 ```
 
-- Based on the result of from the confusion matrix, it is obvious that the second is the better predictor model
-- This is further illustrated by...
--  
+- Based on the result of from the confusion matrix, it intuitively seems that the second is the better predictor model
+- This is further illustrated by the result of the in the second table:
+  -  The precision estimates how well the model is when the predictions a diagnosis of heart disease
+  - The recall estmale how well the model is to correctly predict a diagnosis of hear disease
+  - The accuracy is an estimation of how often the model correctly classify a participant.
+  - The F score is a is the weighted average that makes comparing model easier.
+  - As can be seen in the table the accuracy, precision, recall and F score is higher for the second model, which means the second model is the better model 
 
 ## Discussion
+
+
+- Non of the binomial models are good enough for medical use because 20% to 30% of the patients will be wrongly clasified 
