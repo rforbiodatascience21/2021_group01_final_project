@@ -9,7 +9,12 @@ library(GGally)
 
 
 # Load data ---------------------------------------------------------------
-Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
+Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz", col_types = cols(
+  Age = col_double(),
+  Resting_blood_pressure = col_double(),
+  Serum_cholestoral = col_double(),
+  Maximum_heart_rate_achieved = col_double(),
+  ST_depression_induced_by_exercise = col_double()))
 
 # Plot data ---------------------------------------------------------------
 #Correlation plot of all variables, a bit messy, but gives an ovrview of the
@@ -298,14 +303,7 @@ ggsave(Summary_bar, filename="/cloud/project/results/04_Summary_bar_plots.png", 
 
 #Summary table of data--------------------------------------------------------
 # summary overview of attributes
-Data <- read_tsv(file = "data/03_data_aug.tsv.gz", col_types = cols(
-  Age = col_double(),
-  Resting_blood_pressure = col_double(),
-  Serum_cholestoral = col_double(),
-  Maximum_heart_rate_achieved = col_double(),
-  ST_depression_induced_by_exercise = col_double()))
-
-Data %>% 
+Data_aug %>% 
   select(Age, 
          Resting_blood_pressure, 
          Serum_cholestoral,
