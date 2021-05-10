@@ -100,7 +100,7 @@ rotation_matrix <- data_pca %>%
     hjust = 1, nudge_x = -0.02, 
     color ="#904C2F"
   ) +
-  xlim(-5, 1) + ylim(-.3, 1) +
+  xlim(-1, 1) + ylim(-1, 1) +
   coord_fixed() + # fix aspect ratio to 1:1
   labs(title = "Rotation matrix") +
   theme_minimal_grid(12) 
