@@ -47,17 +47,6 @@ data_pca <- data_aug %>%
   scale() %>% # scale data
   prcomp() # do PCA
 
-
-# plot principal components 
-pca_plot1 <- data_pca %>%
-  augment(data_aug) %>% # add original dataset back in
-  ggplot(aes(.fittedPC1, .fittedPC2, color = Diagnosis_of_disease)) +
-  geom_point(size = 1.5) +
-  #scale_color_manual(
-  #  values = c(O = "violet", 1 = "#D55E00", 2 ="#0072B", 3 ="red", 4 = "blue") 
-  #) +
-  theme_classic() + background_grid()
-
 # #Tidy summarizes information about the components of a model.
 # plot Scree plot of eigenvalues  
 eigenvalues_plot <- data_pca %>%

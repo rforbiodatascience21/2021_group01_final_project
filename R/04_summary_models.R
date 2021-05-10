@@ -40,7 +40,8 @@ Corr_plot <- ggpairs(Data_aug,
                      labeller = label_wrap_gen(10)) +
   labs(title = "Correlation plots of predictive variables stratified on diagnosis") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-Corr_plot
+ggsave(Corr_plot, filename="/cloud/project/results/04_Corr_plot.png", width = 16, height = 9, dpi = 72)
+
 
 
 
