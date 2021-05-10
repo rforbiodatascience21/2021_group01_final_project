@@ -52,100 +52,142 @@ ggsave(Corr_plot, filename="/cloud/project/results/04_Corr_plot.png", width = 16
 plt1 <- Data_aug %>% mutate(Age = case_when(!is.na(Age) ~ "Not NA")) %>%
   count(Age) %>%
   ggplot(aes(x = Age, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Age),
+           alpha = 0.5) + 
   labs(x = "Age",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt2 <- Data_aug %>% mutate(Sex = case_when(!is.na(Sex) ~ "Not NA")) %>%
   count(Sex) %>%
   ggplot(aes(x = Sex, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Sex),
+           alpha = 0.5) + 
   labs(x = "Sex",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt3 <- Data_aug %>% mutate(Chest_pain_type = case_when(!is.na(Chest_pain_type) ~ "Not NA")) %>%
   count(Chest_pain_type) %>%
   ggplot(aes(x = Chest_pain_type, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Chest_pain_type),
+           alpha = 0.5) + 
   labs(x = "Chest pain type",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt4 <- Data_aug %>% mutate(Resting_blood_pressure = case_when(!is.na(Resting_blood_pressure) ~ "Not NA")) %>%
   count(Resting_blood_pressure) %>%
   ggplot(aes(x = Resting_blood_pressure, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Resting_blood_pressure),
+           alpha = 0.5) + 
   labs(x = "Resting blood pressure",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt5 <- Data_aug %>% mutate(Serum_cholestoral = case_when(!is.na(Serum_cholestoral) ~ "Not NA")) %>%
   count(Serum_cholestoral) %>%
   ggplot(aes(x = Serum_cholestoral, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Serum_cholestoral),
+           alpha = 0.5) + 
   labs(x = "Serum cholestoral",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt6 <- Data_aug %>% mutate(Fasting_blood_sugar = case_when(!is.na(Fasting_blood_sugar) ~ "Not NA")) %>%
   count(Fasting_blood_sugar) %>%
   ggplot(aes(x = Fasting_blood_sugar, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Fasting_blood_sugar),
+           alpha = 0.5) + 
   labs(x = "Fasting blood sugar",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt7 <- Data_aug %>% mutate(Resting_electrocardiographic = case_when(!is.na(Resting_electrocardiographic) ~ "Not NA")) %>%
   count(Resting_electrocardiographic) %>%
   ggplot(aes(x = Resting_electrocardiographic, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Resting_electrocardiographic),
+           alpha = 0.5) + 
   labs(x = "Electrocardiographic",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt8 <- Data_aug %>% mutate(Maximum_heart_rate_achieved = case_when(!is.na(Maximum_heart_rate_achieved) ~ "Not NA")) %>%
   count(Maximum_heart_rate_achieved) %>%
   ggplot(aes(x = Maximum_heart_rate_achieved, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Maximum_heart_rate_achieved),
+           alpha = 0.5) + 
   labs(x = "Maximum heart rate",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt9 <- Data_aug %>% mutate(Exercise_induced_angina = case_when(!is.na(Exercise_induced_angina) ~ "Not NA")) %>%
   count(Exercise_induced_angina) %>%
   ggplot(aes(x = Exercise_induced_angina, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Exercise_induced_angina),
+           alpha = 0.5) + 
   labs(x = "Exercise induced angina",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt10 <- Data_aug %>% mutate(ST_depression_induced_by_exercise = case_when(!is.na(ST_depression_induced_by_exercise) ~ "Not NA")) %>%
   count(ST_depression_induced_by_exercise) %>%
   ggplot(aes(x = ST_depression_induced_by_exercise, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = ST_depression_induced_by_exercise),
+           alpha = 0.5) + 
   labs(x = "ST depression",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt11 <- Data_aug %>% mutate(The_slope_of_the_peak_exercise_ST_segment = case_when(!is.na(The_slope_of_the_peak_exercise_ST_segment) ~ "Not NA")) %>%
   count(The_slope_of_the_peak_exercise_ST_segment) %>%
   ggplot(aes(x = The_slope_of_the_peak_exercise_ST_segment, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = The_slope_of_the_peak_exercise_ST_segment),
+           alpha = 0.5) + 
   labs(x = "Slope of ST",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt12 <- Data_aug %>% mutate(Number_of_major_vessels_colored_by_flourosopy = case_when(!is.na(Number_of_major_vessels_colored_by_flourosopy) ~ "Not NA")) %>%
   count(Number_of_major_vessels_colored_by_flourosopy) %>%
   ggplot(aes(x = Number_of_major_vessels_colored_by_flourosopy, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Number_of_major_vessels_colored_by_flourosopy),
+           alpha = 0.5) + 
   labs(x = "Flouroscopy",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 plt13 <- Data_aug %>% mutate(Thal = case_when(!is.na(Thal) ~ "Not NA")) %>%
   count(Thal) %>%
   ggplot(aes(x = Thal, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Thal),
+           alpha = 0.5) + 
   labs(x = "Thal",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis_c()
 
 plt14 <- Data_aug %>% mutate(Diagnosis_of_disease = case_when(!is.na(Diagnosis_of_disease) ~ "Not NA")) %>%
   count(Diagnosis_of_disease) %>%
   ggplot(aes(x = Diagnosis_of_disease, y=n)) +
-  geom_col() + 
+  geom_col(mapping = aes(fill = Diagnosis_of_disease),
+           alpha = 0.5) + 
   labs(x = "Diagnosis",
-       y = "")
+       y = "") +
+  theme(legend.position = "none") +
+  scale_fill_viridis(discrete=TRUE)
 
 NA_Bar <- ggarrange(plt1, plt2, plt3, plt4, plt5, plt6, plt7,
                     plt8, plt9, plt10, plt11, plt12, plt13, plt14,
