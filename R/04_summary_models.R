@@ -303,7 +303,7 @@ ggsave(Summary_bar, filename="/cloud/project/results/04_Summary_bar_plots.png", 
 
 #Summary table of data--------------------------------------------------------
 # summary overview of attributes
-Data_aug %>% 
+Summary_table <- Data_aug %>% 
   select(Age, 
          Resting_blood_pressure, 
          Serum_cholestoral,
@@ -315,3 +315,6 @@ Data_aug %>%
   spread(key = stat, value = value) %>% 
   mutate("mean w. sd" = paste0(round(mean, 2), " (", intToUtf8("177"), round(sd, 2), ")")) %>% 
   select(type, 'mean w. sd', min, max) 
+
+save(x = Summary_table,
+     file = "/cloud/project/results/04_Summary_table.RData")
