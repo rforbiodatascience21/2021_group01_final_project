@@ -84,6 +84,13 @@ kable(Summary_table,format = "html", digits = 3)%>%
 ![](/cloud/project/results/08_kmeans_dist.png"){width=50%}
 
 ## Supervised learning: Prediction model based on presence of heart disease 
+
+- Two binomial regression was created:
+  - The first binomial Regression model predicts the odds of being diagnosed with a heart disease, given the participants age
+  - The first binomial Regression model predicts the odds of being diagnosed with a heart disease, given the participants age, gender and type of chest pain
+  
+![](/cloud/project/results/05_plot_binomial_regression.png){width=100%}
+
 ```{r, echo=FALSE}
 load("/cloud/project/results/05_Matrix_conf.RData")
 Matrix_conf1 <- Matrix_conf %>%
@@ -97,5 +104,8 @@ kable(Matrix,format = "html", digits = 3)%>%
   kable_styling(font_size = 14)
 ```
 
+- Based on the result of from the confusion matrix, it is obvious that the second is the better predictor model
+- This is further illustrated by...
+-  
 
 ## Discussion
