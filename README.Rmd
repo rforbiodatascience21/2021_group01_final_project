@@ -10,6 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Description
+This project does different R analysis on the heart data set:
+https://archive.ics.uci.edu/ml/datasets/Heart+Disease?fbclid=IwAR3SbR6Eo3ow8dYal4mTv321XOUAUg8yw5g_WY-eDz9hUQS_0jJ0-qTR9v8
+
+Datasets from Long Beach, Hungary, Cleveland and Switzerland are all included. Before using the data, our R script joins all the datasets and convert serum cholesterol and blood pressure values of 0 into N/A's, since these are 
+
 Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
 ## Data 
@@ -88,6 +93,27 @@ Attribute Information:
     * [1;4] = types of heart disease 
 
 ## Installation
+In order to get the all the project files clone the following repository from git: 
+git clone https://github.com/rforbiodatascience21/2021_group01_final_project
+
+## Dependencies
+The following software needs to be installed for running the code locally:
+- R
+
+For running non-local, an Rstudio Cloud session can be used: https://rstudio.cloud/
+
+The following packages needs to be installed inside R for the scripts to function:
+
+- library(tidyverse)
+- library(ggplot2)
+- library(ggpubr)
+- library(broom)
+- library(cowplot)
+-
+-
+
+
+
 Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
 ## Usage
