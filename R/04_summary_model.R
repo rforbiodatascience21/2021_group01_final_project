@@ -12,6 +12,8 @@ library(GGally)
 Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 # Plot data ---------------------------------------------------------------
+#Correlation plot of all variables, a bit messy, but gives an ovrview of the
+#whole dataset
 Corr_plot <- ggpairs(Data_aug,
                      mapping = aes(colour = Diagnosis_of_disease),
                      columns = c("Age","Sex_cat", "Chest_pain_type_cat",
