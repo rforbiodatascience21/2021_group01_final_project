@@ -106,6 +106,3 @@ kmeans <- data_kmeans_aug %>%
 
 # Save plot as png
 ggsave("results/08_kmeans.png", device = "png")
-
-
-
