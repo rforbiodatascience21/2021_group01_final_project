@@ -9,7 +9,12 @@ library(GGally)
 
 
 # Load data ---------------------------------------------------------------
-Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
+Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz", col_types = cols(
+  Age = col_double(),
+  Resting_blood_pressure = col_double(),
+  Serum_cholestoral = col_double(),
+  Maximum_heart_rate_achieved = col_double(),
+  ST_depression_induced_by_exercise = col_double()))
 
 # Plot data ---------------------------------------------------------------
 #Correlation plot of all variables, a bit messy, but gives an ovrview of the
@@ -35,10 +40,9 @@ Corr_plot <- ggpairs(Data_aug,
                      labeller = label_wrap_gen(10)) +
   labs(title = "Correlation plots of predictive variables stratified on diagnosis") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-Corr_plot
-png(filename="/cloud/project/results/Summary_correlation_plots.png",  width = 1000, height = 800)
-Corr_plot
-dev.off()
+ggsave(Corr_plot, filename="/cloud/project/results/04_Corr_plot.png", width = 16, height = 9, dpi = 72)
+
+
 
 
 # NA plots---------------------------------
@@ -145,7 +149,7 @@ NA_Bar <- ggarrange(plt1, plt2, plt3, plt4, plt5, plt6, plt7,
                     ncol = 7,
                     nrow = 2)
 
-ggsave(NA_Bar, filename="/cloud/project/results/NA_Bar.png", width = 16, height = 9, dpi = 72)
+ggsave(NA_Bar, filename="/cloud/project/results/04_NA_Bar.png", width = 16, height = 9, dpi = 72)
 
 
 # Summary density plots---------------------------------------------
@@ -204,7 +208,7 @@ Summary_density = ggarrange(pltchol,
                             pltnum,
                             common.legend = TRUE) 
 
-ggsave(Summary_density, filename="/cloud/project/results/Summary_density_plots.png", width = 16, height = 9, dpi = 72)
+ggsave(Summary_density, filename="/cloud/project/results/04_Summary_density_plots.png", width = 16, height = 9, dpi = 72)
 
 #Summary bar plots ---------------------------------------------
 datadist_sex <- Data_aug %>% group_by(Sex_cat) %>% 
@@ -296,4 +300,22 @@ Summary_bar = ggarrange(plot_sex,
                         plot_Thal,
                         common.legend = TRUE) 
 
-ggsave(Summary_bar, filename="/cloud/project/results/Summary_bar_plots.png", width = 16, height = 9, dpi = 72)
+ggsave(Summary_bar, filename="/cloud/project/results/04_Summary_bar_plots.png", width = 16, height = 9, dpi = 72)
+
+#Summary table of data--------------------------------------------------------
+# summary overview of attributes
+Summary_table <- Data_aug %>% 
+  select(Age, 
+         Resting_blood_pressure, 
+         Serum_cholestoral,
+         Maximum_heart_rate_achieved,
+         ST_depression_induced_by_exercise) %>% 
+  summarise_all(funs(mean, sd, min,max),na.rm = TRUE) %>% 
+  gather(key = key, value = value) %>% 
+  separate(key, into = c("type", "stat"), sep = "_(?=[^_]+$)") %>% 
+  spread(key = stat, value = value) %>% 
+  mutate("mean w. sd" = paste0(round(mean, 2), " (", intToUtf8("177"), round(sd, 2), ")")) %>% 
+  select(type, 'mean w. sd', min, max) 
+
+save(x = Summary_table,
+     file = "/cloud/project/results/04_Summary_table.RData")

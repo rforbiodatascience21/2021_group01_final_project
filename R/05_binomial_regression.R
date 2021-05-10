@@ -55,10 +55,10 @@ Plot3 <- Data %>%
 
 #To get around the problem with the different data sizes, 
 # we remove the rows containing NA
-Data <- Data %>%
-  mutate(Diagnosis_of_disease_No=factor(Diagnosis_of_disease_No))%>%
-  select(Diagnosis_of_disease_No,Age,Sex,Chest_pain_type, id) %>%
-  na.omit()
+
+Data <- Data_selection(data = Data,var = c("Diagnosis_of_disease_No","Age","Sex","Chest_pain_type", "id"), rm_na = TRUE) %>%
+  mutate(Diagnosis_of_disease_No=factor(Diagnosis_of_disease_No))
+
 
 Data_model <- Data %>%
   sample_frac(.70)
@@ -110,8 +110,8 @@ Plot4 <- Data %>%
 
 # Write data --------------------------------------------------------------
 save(x = Matrix_conf,
-          file = "results/Matrix_conf.RData")
-ggsave(Plot1, filename = "results/07_plot_density_of_disease.png", width = 16, height = 9, dpi = 72)
-ggsave(Plot2, filename = "results/07_plot_histogram_of_disease.png", width = 16, height = 9, dpi = 72)
-ggsave(Plot3, filename = "results/07_plot_density_of_disease_mutated.png", width = 16, height = 9, dpi = 72)
-ggsave(Plot4, filename = "results/07_plot_binomial_regression.png", width = 16, height = 9, dpi = 72)
+          file = "results/05_Matrix_conf.RData")
+ggsave(Plot1, filename = "results/05_plot_density_of_disease.png", width = 16, height = 9, dpi = 72)
+ggsave(Plot2, filename = "results/05_plot_histogram_of_disease.png", width = 16, height = 9, dpi = 72)
+ggsave(Plot3, filename = "results/05_plot_density_of_disease_mutated.png", width = 16, height = 9, dpi = 72)
+ggsave(Plot4, filename = "results/05_plot_binomial_regression.png", width = 16, height = 9, dpi = 72)

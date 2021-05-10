@@ -1,7 +1,11 @@
+# Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
 library(broom)
 library(tidyverse)
+
+# Functions ---------------------------------------------------------------
+source(file = "R/99_functions.R")
 
 # Load augmented data
 data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz", 
@@ -21,27 +25,30 @@ data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz",
                                   slope_of_ST_cat = col_character(),
                                   Thal_cat = col_character(),
                                   Age_class = col_character(), 
-                                  diagnosis_of_heart_disease =col_character() )) %>% 
-  select(Age,
-         Resting_blood_pressure,
-         Serum_cholestoral, 
-         Maximum_heart_rate_achieved,
-         ST_depression_induced_by_exercise, 
-         Location, 
-         Diagnosis_of_disease,
-         Sex_cat, 
-         Chest_pain_type_cat,
-         Fasting_blood_sugar_cat,
-         Resting_electrocardiographic_cat,
-         slope_of_ST_cat,
-         Thal_cat,
-         Age_class, diagnosis_of_heart_disease) %>% drop_na()
+                                  diagnosis_of_heart_disease =col_character() )) 
 
+Data <- Data_selection(data = data_aug,var = c("Age",
+                                               "Resting_blood_pressure",
+                                               "Serum_cholestoral", 
+                                               "Maximum_heart_rate_achieved",
+                                               "ST_depression_induced_by_exercise", 
+                                               "Location", 
+                                               "Diagnosis_of_disease",
+                                               "Sex_cat", 
+                                               "Chest_pain_type_cat",
+                                               "Fasting_blood_sugar_cat",
+                                               "Resting_electrocardiographic_cat",
+                                               "slope_of_ST_cat",
+                                               "Thal_cat",
+                                               "Age_class", "diagnosis_of_heart_disease"), rm_na = TRUE) 
+
+  
+  
 # vigtigt at fjerne NA inden pca
 # PCA ---------------------------------------------------------------------
 
 # Create PCA object
-data_pca <- data_aug %>%
+data_pca <- Data %>%
   select(where(is.numeric)) %>% 
   scale() %>% # scale data
   prcomp() # do PCA
@@ -60,7 +67,7 @@ ggsave("results/08_eigenvalues_plot.png", plot = eigenvalues_plot, device = "png
 
 # Augment to add original dataset back in
 data_pca_aug <- data_pca %>% 
-  augment(data_aug)
+  augment(Data)
 
 # Plot principal components  with diagnosis of disease as labels
 plot_pca <- data_pca_aug %>% 
@@ -95,6 +102,7 @@ kmeans <- data_kmeans_aug %>%
 # Save plot as png
 ggsave("results/08_kmeans.png", device = "png")
 
+
 # seperation of class 
 dist_cluster <- data_kmeans_aug %>% 
   group_by(Cluster) %>% 
@@ -106,3 +114,4 @@ dist_cluster <- data_kmeans_aug %>%
 
 # Save plot as png
 ggsave("results/08_kmeans_dist.png", device = "png")
+
