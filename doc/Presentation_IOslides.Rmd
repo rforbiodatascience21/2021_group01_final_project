@@ -1,7 +1,7 @@
 ---
-title: "Presentation"
-author: "Group_1"
-date: "9 5 2021"
+title: "Presentation of heart data project"
+author: "Laura Hjort Blicher, Rolf Glenny Mogensen, Malte Birk, Tenna Pedersen"
+date: "11_05_2021"
 output: ioslides_presentation
 ---
 
@@ -28,7 +28,7 @@ Created in 1988 by:
 - Contains information of heart patients from 4 locations: 
 Cleveland, Hungary, Switzerland and Long Beach. </font>
 
-<font size = "5">Goal of study</font>
+<font size = "4">Goal of study</font>
 
 - <font size = "3">Perform visual analysis of data distribution
 - Try to predict if patients have heart disease or not according to features in the dataset (PCA, K-means, Binomial regression)
@@ -66,19 +66,59 @@ https://github.com/rforbiodatascience21/2021_group01_final_project
 - <font size = "4">Identifiers for the variables was not released for raw data </font>
 - <font size = "4">14/76 attributes was used</font>
 - <font size = "4">The Cleveland database is the only one that has been used by ML researchers to this date</font>
-- <font size = "4">Example of raw data collected from Cleveland </font>
+- <font size = "4">Example of snippet raw data collected from Cleveland </font>
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
 data_raw <- read_csv("../data/_raw/processed.cleveland.data")
-print(data_raw, width = 80, n = 4, n_extra = 1)
-
-#load("/cloud/project/results/04_Summary_table.RData")
-#kable(Summary_table,format = "html", digits = 3)%>%
-#  kable_styling(font_size = 12)%>%
-#  column_spec(1:4,width = "1.5cm")%>%
-#  column_spec(4, width = "2cm")
+head(data_raw, 4) %>% select(1:9)
 ```
+## All included variables
+<font size = "2">
+1. The age of the participates in the study in years    
+2. The gender of the  participates
 
+    * 0 = female, * 1 = male
+
+3. The type of chest pain
+
+    * 1 = typical angina, * 2 = atypical angina, * 3 = non-anginal pain, * 4 = asymptomatic
+
+4. The resting blood pressure in mm Hg on admission to the hospital  
+
+5. The serum cholestoral in $\frac{mg}{dl}$    
+
+6. The fasting blood sugar
+
+    * 0 = fasting blood sugar $< 120 \frac{mg}{dl}$, * 1 = fasting blood sugar $> 120 \frac{mg}{dl}$
+
+7. The result of the resting electrocardiographic
+
+    * 0 = normal, * 1 = ST  and/or T wave abnormality, * 2 = showing probable or definite left ventricular hypertrophy
+
+8. The maximum heart rate achieved   
+
+9. Exercise induced angina
+
+    * 1 = yes, * 0 = no
+
+10. ST depression induced by exercise relative to resting stage   
+
+11. The slope of the peak exercise ST segment
+
+    * 1 = upsloping, * 2 = flat, * 3 = downsloping
+
+12. The number of major vessels colored by flourosopy
+
+    * $0\leq Major\ vessels\leq 3$
+
+13. The defect type of thalassemia
+
+    * 3 = normal, * 6 = fixed defect, * 7 = reversable defect
+
+14. The diagnosis of heart disease
+
+    * 0 = no heart disease present, * [1;4] = types of heart disease 
+</font>
 ## Data Cleaning 
 - <font size = "4"> Joined together the 4 data frames - Handling of missing values </font>
 ![](/cloud/project/results/04_NA_Bar.png){width=100%}
@@ -93,7 +133,7 @@ print(data_raw, width = 80, n = 4, n_extra = 1)
 ## Descriptive data analysis and visualisations
 - <font size = "4">Distribution according to disease presence</font>
 - <font size = "4">General thoughts for data composition</font>
-- <font size = "4">Data seems balanced</font>
+- <font size = "4">Data seems balanced, disease present 46,5%, not present 53,5%</font>
 
 ```{r, echo = FALSE}
 load("/cloud/project/results/04_Summary_table.RData")
@@ -129,6 +169,8 @@ kable(Summary_table,format = "html", digits = 3)%>%
 
 ## Unsupervised learning: Kmeans Cluster
 - Classifies ~ 75% is correctly "classified"
+
+
 ```{r, echo=FALSE}
 load("/cloud/project/results/08_Matrix_conf.RData")
 Matrix_conf21 <- Matrix_conf2 %>%
@@ -171,12 +213,14 @@ kable(Matrix,format = "html", digits = 3)%>%
 ### Considerations concerning the data used
 - <font size = "4">Use of all 4 databases vs. use of Cleveland_data only </font> 
 - <font size = "4">Missing information as a result of removing rows containing NA</font>
+- <font size = "4">Old data sets might have some medical measurements that 
+could be irrelevant and outdated for prediction today</font>
 
 ### Biological insights 
-- <font size = "4">which variables contribute to prediction.</font>
-- <font size = "4"> Binomial regression: 20% to 30% of the patients will be wrongly classified. 
-- <font size = "4"> K-means: X% to X% of the patients will be wrongly classified. 
-- <font size = "4"> Results of models indicate that it is possible to predict presence of heart disease, however none of the models used are good enough for medical usage. </font> 
+- <font size = "4">Which variables contribute to prediction.</font>
+- <font size = "4">Binomial regression: 20% to 30% of the patients will be wrongly classified.</font> 
+- <font size = "4">K-means: 25% of the patients will be wrongly classified.</font>
+- <font size = "4">Results of models indicate that it is possible to predict presence of heart disease, however none of the models used are good enough for medical usage.</font> 
 
-## Thank you 
+## Thank you
 ### Questions?
