@@ -1,5 +1,6 @@
 # Clear workspace ---------------------------------------------------------
 rm(list = ls())
+
 library(tidyverse)
 library(ggplot2)
 library(ggpubr)
@@ -74,8 +75,7 @@ eigenvalues_plot <- data_pca %>%
              fill = PC,
              color = PC)) +
   geom_col(alpha = 0.5) + 
-  labs(title = "Amount of total variance explained 
-       by PCs")+ 
+  labs(title = "Total variance explained  by PCs")+ 
   theme(legend.position = "none") +
   scale_fill_viridis() +
   scale_color_viridis()
@@ -95,12 +95,12 @@ rotation_matrix <- data_pca %>%
   ggplot(aes(PC1, PC2)) +
   geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
   geom_text(
-    aes(label = column),
+    aes(label = c("Age", "Blood Pressure", "Cholestoral", 
+                  "Heart rate", "ST depression", "Flouroscopy")),
     hjust = 1, nudge_x = -0.02, 
     color ="#904C2F"
   ) +
-  xlim(-5, 1) + ylim(-.3, 1) +
-  coord_fixed() + # fix aspect ratio to 1:1
+  xlim(-1.2, 0.5) + ylim(-0.35, 0.8) +
   labs(title = "Rotation matrix") +
   theme_minimal_grid(12) 
 
@@ -119,7 +119,8 @@ plot_pca <- data_pca_aug %>%
              colour = Diagnosis_of_disease)) +
 
   geom_point(size = 1.5) + 
-  labs(title = "Principal components") + 
+  labs(title = "Principal components",
+       color = "Diagnosis") + 
   geom_point(size = 1.5) +
   scale_color_viridis(discrete = TRUE)
 
@@ -128,8 +129,9 @@ plot_pca <- data_pca_aug %>%
 
 pca_combined <- ggarrange(ggarrange(eigenvalues_plot, 
           plot_pca, common.legend = FALSE), 
-          rotation_matrix, ncol=1, nrow=2, common.legend = FALSE)
-ggsave("results/08_pca_combined.png", plot = pca_combined, device = "png")
+          rotation_matrix, ncol = 1, nrow = 2, common.legend = FALSE)
+ggsave(pca_combined, filename="results/08_pca_combined.png", 
+       width = 16, height = 9, dpi = 72)
 
 # K-means -----------------------------------------------------------------
 
@@ -166,8 +168,7 @@ dist_cluster <- data_kmeans_aug %>%
            position = "dodge", 
            width = 0.5,
            alpha = 0.5) + 
-  labs(title = "Distribution of presence of disease 
-       w.r.t assigned cluster") +
+  labs(title = "Distribution of presence of disease w.r.t assigned cluster") +
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
 
@@ -175,7 +176,9 @@ dist_cluster <- data_kmeans_aug %>%
 #ggsave("results/08_kmeans_dist.png", device = "png")
 
 k_means_combined <- ggarrange(kmeans, dist_cluster, nrow=1, ncol=2)
-ggsave("results/08_kmeans.png", plot=k_means_combined, device = "png")
+
+ggsave(k_means_combined, filename="results/08_kmeans.png", 
+       width = 16, height = 9, dpi = 72)
 
 # create confusion matrix 
 Data <- data_kmeans_aug %>%
