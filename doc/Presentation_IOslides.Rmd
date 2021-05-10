@@ -54,26 +54,29 @@ Halli halløj\
 ## Analysis and visualisations
 - Distribution according to disease presence
 - Colored by presence of disease 
-- andre kloge ord 
 ![](/cloud/project/results/Summary_density_plots.png){width=50%}
 ```{r, message = FALSE}
 load("/cloud/project/results/04_Summary_table.RData")
 kable(Summary_table,format = "html", digits = 3)%>%
   kable_styling(font_size = 12)%>%
   column_spec(1:4,width = "1.5cm")%>%
-  column_spec(9, width = "2cm")
+  column_spec(4, width = "2cm")
 ```
 
 
 ## Analysis and visualisations
 - Distribution according to disease presence
 - Colored by presence of disease
-- andre kloge ord 
+- Distribution of observations with presence of disease and absence of disease is equal 
 ![](/cloud/project/results/04_Summary_bar_plots.png){width=100%}
+## Unsupervised and supervised learning
+- Handling of NAs
+![](/cloud/project/results/04_NA_Bar.png){width=50%}
 
 ## Unsupervised learning: Results from PCA 
 - Handling of NA and selection of data 
-- kloge ord 
+- Regions in which the majority of the pool of observations show consistency in presence/absence of disease
+- Indicating that we should be able to separate observations with presence of disease from absence of disease 
 ![](/cloud/project/results/08_plot_pca.png){width=50%}
 ![](/cloud/project/results/08_eigenvalues_plot.png){width=50%}
 
