@@ -12,6 +12,9 @@ library(kableExtra)
 ```
 
 ## Introduction
+Goal of study:
+- Perform visual analysis of data distribution
+- Classify if patients have heart disease or not according to features in the dataset (PCA, K-means, Binimial regression)
 
 ## Methods: data processing
 Halli halløj\
