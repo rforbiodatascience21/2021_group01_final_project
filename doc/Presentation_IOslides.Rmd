@@ -3,6 +3,7 @@ title: "Presentation"
 author: "Group_1"
 date: "9 5 2021"
 output: ioslides_presentation
+
 ---
 
 ```{r setup, include=FALSE}
@@ -13,15 +14,9 @@ library(tidyverse)
 ```
 
 ## Introduction
-
-Introduction to study by xx et. al 
-- Original data
-  - example of raw data collected from Cleveland 
-```{r, message = FALSE}
-data_raw <- read_csv("../data/_raw/processed.cleveland.data")
-print(data_raw, width = 80, n = 4, n_extra = 1)
-```
-- Additional data includes data collected from Hungary, Switzerland and Long Beach 
+Features in  study by xx et. al 
+- Data was pulled on 27. april 2021 and is available at: xx
+- Contains information of heart patients from 4 locations: Cleveland, Hungary, Switzerland and Long Beach  
 
 ## Goal of study
 - Perform visual analysis of data distribution
@@ -29,7 +24,8 @@ print(data_raw, width = 80, n = 4, n_extra = 1)
 
 ## Materials and methods: Data processing
 - Data processing, modeling and creation of presentation was performed in Rstudio Cloud.
-- Way of coding follows O'Reillys R for Data Science by Wickham and Grolemund  
+- Way of coding follows O'Reillys R for Data Science by Wickham and Grolemund 
+- Data wrangling was achieved through _piping_ (`%>%`) 
 - Whole project exists at github at: 
 https://github.com/rforbiodatascience21/2021_group01_final_project
 
@@ -47,47 +43,72 @@ https://github.com/rforbiodatascience21/2021_group01_final_project
 - Supervised classification model
   - Binomial regression 
 
-## Tidying and wrangling data
-Halli halløj\
-![](/cloud/project/results/Flowchart_R_presentation.png){width=100%}
+## Data wrangling and cleaning 
+### Data Import
+- Modified version of data sets was used
+- Identifiers for the variables was not released for raw data 
+- Choice of variables to include
+- Example of raw data collected from Cleveland 
 
-## Analysis and visualisations
+```{r, message = FALSE}
+data_raw <- read_csv("../data/_raw/processed.cleveland.data")
+print(data_raw, width = 80, n = 4, n_extra = 1)
+```
+
+### Data Cleaning 
+- Joined together the 4 data frames by xx
+- Handling of missing values 
+- Number of NAs differed across variables
+- Clean small dataset vs large dataset w. NAs
+![](/cloud/project/results/04_NA_Bar.png){width=50%}
+
+## Tidying and wrangling data
+Data was augmented by creating new more insightful columns
+- Created categorical age groups for patients, location, diagnosis of disease, sex, chest pain type, fasting blood sugar,  resting electrocardiographic, exercise induced angina, slope of ST and thal
+
+![](/cloud/project/results/Flowchart_R_presentation.png){width=50%}
+
+## Descriptive data analysis and visualisations
 - Distribution according to disease presence
-- Colored by presence of disease 
+- General thoughts for data composition ( plot over antal med presence/not presence, sex osv)
+- Data seems balanced 
+
+![](/cloud/project/results/Heart_attack_dist.png){width=50%}
+- general distribution of sex and age 
+- vælge nogle af plotsne ud, så det virker som om at vi har en plan 
+
 ![](/cloud/project/results/Summary_density_plots.png){width=50%}
 ```{r, message = FALSE}
+
 load("/cloud/project/results/04_Summary_table.RData")
 kable(Summary_table,format = "html", digits = 3)%>%
   kable_styling(font_size = 12)%>%
   column_spec(1:4,width = "1.5cm")%>%
   column_spec(4, width = "2cm")
+
 ```
 
-
-## Analysis and visualisations
+## Descriptive data analysis and visualisations
 - Distribution according to disease presence
-- Colored by presence of disease
-- Distribution of observations with presence of disease and absence of disease is equal 
+- First hand biological insights 
+- continous plot  
 ![](/cloud/project/results/04_Summary_bar_plots.png){width=100%}
-## Unsupervised and supervised learning
-- Handling of NAs
-![](/cloud/project/results/04_NA_Bar.png){width=50%}
 
 ## Unsupervised learning: Results from PCA 
-- Handling of NA and selection of data 
+- Data wrangling and handling of NAs 
 - Regions in which the majority of the pool of observations show consistency in presence/absence of disease
+- The first three PCs account for ~70% of the total variance
 - Indicating that we should be able to separate observations with presence of disease from absence of disease 
 ![](/cloud/project/results/08_plot_pca.png){width=50%}
 ![](/cloud/project/results/08_eigenvalues_plot.png){width=50%}
 
 ## Unsupervised learning: Kmeans Cluster
 - Handling of NA and selection of data 
-- kloge ord 
+- Performed on PCA data   
 ![](/cloud/project/results/08_kmeans.png){width=50%}
 ![](/cloud/project/results/08_kmeans_dist.png"){width=50%}
 
 ## Supervised learning: Prediction model based on presence of heart disease 
-
 - We want to create a model that can identified whether a participant have a heart disease or not based on the age of the participant
 - This plot show the distribution of the in age for the different locations in each of the to categories corresponding to having a heart disease or not.
   - There does not seem to be a strong correlation between age of the participant and a heart disease alon based on these plots
@@ -123,6 +144,11 @@ kable(Matrix,format = "html", digits = 3)%>%
   - As can be seen in the table the accuracy, precision, recall and F score is higher for the second model, which means the second model is the better model 
 
 ## Discussion
+### Considerations concerning the data used 
+- Missing information as a result of removing rows containing NA
+### Biological insights 
+- Prevalence of symptoms e.g xx is more abundant for patient with heart disease 
+- Non of the binomial models are good enough for medical use because 20% to 30% of the patients will be wrongly classified 
 
-
-- Non of the binomial models are good enough for medical use because 20% to 30% of the patients will be wrongly clasified 
+## Thank you 
+### Questions?
