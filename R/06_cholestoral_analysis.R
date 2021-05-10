@@ -8,23 +8,27 @@ library(ggpubr)
 library(broom)  # devtools::install_github("tidymodels/broom")
 library(cowplot)
 
+# Functions ---------------------------------------------------------------
+source(file = "R/99_functions.R")
+
+
 # Load data ---------------------------------------------------------------
 Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
 
 # Plot data ---------------------------------------------------------------
 # Location cholesterol plot
-Location_cholesterol_plot <- Data_aug %>%
-  select(Location, Serum_cholestoral) %>%
-  drop_na(Serum_cholestoral) %>%
+
+Data <- Data_selection(data = Data_aug,var = c("Location","Serum_cholestoral","Diagnosis_of_disease"), rm_na = TRUE, rm_na_from = c("Serum_cholestoral")) 
+  
+
+Location_cholesterol_plot <- Data %>%
   ggplot(mapping = aes(x = Serum_cholestoral,
                        y = Location)) +
   geom_boxplot(aes(fill = Location)) +
   theme_classic() +
   theme(legend.position = "none" )
 
-mean_cholesterol <- Data_aug %>% 
-  select(Location, Serum_cholestoral) %>% 
-  drop_na(Serum_cholestoral) %>% 
+mean_cholesterol <- Data %>% 
   group_by(Location) %>% 
   summarise(mean = round(mean(Serum_cholestoral)))
 
@@ -37,9 +41,7 @@ mean_string <- format_tsv(
 
 # Location and heart disease plot
 # Here the serum cholesterol is also excluded since this is what is compared.
-Location_disease_plot <- Data_aug %>%
-  select(Location, Diagnosis_of_disease ,Serum_cholestoral) %>%
-  drop_na(Serum_cholestoral) %>%
+Location_disease_plot <- Data %>%
   ggplot(aes(y = Location,
              fill = Diagnosis_of_disease)) +
   geom_bar(position = position_dodge(),color = "black") +
@@ -48,9 +50,7 @@ Location_disease_plot <- Data_aug %>%
   theme(legend.position = "none") +
   xlab("Grey = people with disease not present\n Orange = people with disease present")
 
-Diagnosis_percentage <- Data_aug %>% 
-  select(Location, Serum_cholestoral,Diagnosis_of_disease) %>% 
-  drop_na(Serum_cholestoral) %>% 
+Diagnosis_percentage <- Data %>% 
   group_by(Location) %>% 
   count(Diagnosis_of_disease)
 
