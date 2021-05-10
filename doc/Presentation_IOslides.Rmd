@@ -128,6 +128,21 @@ kable(Summary_table,format = "html", digits = 3)%>%
 - Handling of NA and selection of data 
 - Performed on PCA data   
 ![](/cloud/project/results/08_kmeans.png){width=50%}
+## Unsupervised learning: Kmeans Cluster
+- Classifies ~ 75% is correctly "classified"
+```{r, echo=FALSE}
+load("/cloud/project/results/08_Matrix_conf.RData")
+Matrix_conf21 <- Matrix_conf2 %>%
+  select(`True Positive`,`False Positive`,`False Negative`,`True Negative`)
+Matrix2 <- Matrix_conf2 %>%
+  select(accuracy,Precision,Recall,F_score)
+
+kable(Matrix_conf21,format = "html", digits = 3)%>%
+  kable_styling(font_size = 14)
+kable(Matrix2,format = "html", digits = 3)%>%
+  kable_styling(font_size = 14)
+
+```
 
 ![](/cloud/project/results/08_kmeans_dist.png){width=50%}
 

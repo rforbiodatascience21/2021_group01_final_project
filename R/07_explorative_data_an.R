@@ -37,7 +37,9 @@ Heart_attack_dist <- Data %>%
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
 
-ggsave(Heart_attack_dist, filename="/cloud/project/results/07_Heart_attack_distribution.png", width = 16, height = 9, dpi = 72)
+ggsave(Heart_attack_dist, 
+       filename="/cloud/project/results/07_Heart_attack_distribution.png", 
+       width = 16, height = 9, dpi = 72)
 
 
 ' observation: 
@@ -57,7 +59,7 @@ sex_present_plt <- Data  %>% filter(Diagnosis_of_disease == "Present") %>%
   ggplot(aes(x = n, y = Sex_cat,
              color = Sex_cat,
              fill = Sex_cat)) +
-  geom_col(alpha=0.5) + 
+  geom_col(alpha = 0.5) + 
   labs(title = "Gender vs. heart attack",
        y = "Sex",
        fill = "Sex",
@@ -81,7 +83,9 @@ sex_annotated <- sex_present_plt +
              select(Percentage) %>% 
              round(2))
 
-ggsave(sex_annotated, filename="/cloud/project/results/07_sex_present.png", width = 16, height = 9, dpi = 72)
+ggsave(sex_annotated, 
+       filename="/cloud/project/results/07_sex_present.png", 
+       width = 16, height = 9, dpi = 72)
 
 '
 The Heart attack percentage for females is around 10 % and for males is around 90% i.e. 
@@ -91,15 +95,15 @@ males have more chances for having Heart Attack
 # Distribution of age wrt heart disease 
 pltbox = Data %>% 
   ggplot(mapping = aes(x = Age,
-                       y=Diagnosis_of_disease, 
+                       y = Diagnosis_of_disease, 
                        fill = Diagnosis_of_disease,
                        color = Diagnosis_of_disease)) + 
   geom_boxplot(alpha = 0.5) + 
   xlim(0,80) +
-  labs(x = "Age", y="") + 
+  labs(x = "Age", y = "") + 
   theme_minimal() + 
-  theme(axis.title=element_blank(), 
-        axis.text.y=element_blank()) + 
+  theme(axis.title = element_blank(), 
+        axis.text.y = element_blank()) + 
   labs(title = "Distribution of age Pain w.r.t heart attack") +
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
@@ -117,7 +121,8 @@ age <- ggarrange(pltbox,
           nrow = 2, common.legend = TRUE, 
           heights = c(1, 2), align = "v") 
 
-ggsave(age, filename="/cloud/project/results/07_age.png", width = 16, height = 9, dpi = 72)
+ggsave(age, filename="/cloud/project/results/07_age.png", 
+       width = 16, height = 9, dpi = 72)
 
 
 #Data %>%
@@ -128,26 +133,6 @@ ggsave(age, filename="/cloud/project/results/07_age.png", width = 16, height = 9
 
 
 ###### other 
-Data = Data %>% 
-  mutate(Age_class = case_when(Age < 20 ~ ">20",
-                               20 <= Age & Age < 30 ~ "20-30",
-                               30 <= Age & Age < 40 ~ "30-40",
-                               40 <= Age & Age < 50 ~ "40-50",
-                               50 <= Age & Age < 60 ~ "50-60",
-                               60 <= Age & Age < 70 ~ "60-70",
-                               70 <= Age & Age < 80 ~ "70-80",
-                               80 <= Age ~ "80<"))
-
-Data <- Data %>%
-  mutate(Age_class = factor(Age_class, levels =  c("20-30", 
-                                                   "30-40", 
-                                                   "40-50",
-                                                   "50-60",
-                                                   "60-70",
-                                                   "70-80",
-                                                   "80<"
-                                                   )))
-
 Data %>% group_by(Age_class)  %>% 
   summarise(n = n()) 
 
@@ -165,22 +150,23 @@ Age_class     n
 Data  %>% group_by(Diagnosis_of_disease)  %>% count(Age_class)
 
 age_class <- Data  %>% group_by(Diagnosis_of_disease)  %>% count(Age_class) %>%
-  ggplot(aes(x = Age_class, y=n)) +
+  ggplot(aes(x = Age_class, y = n)) +
   geom_col(aes(color = Diagnosis_of_disease,
                fill = Diagnosis_of_disease),
-           alpha=0.5,
+           alpha = 0.5,
            position = "dodge") +
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
 
-ggsave(age_class, filename="/cloud/project/results/07_age_class.png", width = 16, height = 9, dpi = 72)
+ggsave(age_class, filename="/cloud/project/results/07_age_class.png", 
+       width = 16, height = 9, dpi = 72)
 
 #### 
 #Checking the distribution of Chest Pain with respect to Heart Disease
 
 chest_dist_plt <- Data  %>% group_by(Diagnosis_of_disease) %>% 
   count(Chest_pain_type_cat) %>%
-  ggplot(aes(x = Chest_pain_type_cat, y=n, 
+  ggplot(aes(x = Chest_pain_type_cat, y = n, 
              fill = Diagnosis_of_disease,
              color = Diagnosis_of_disease)) +
   geom_bar(stat = "identity", position = "dodge", width = 0.5,
@@ -190,7 +176,8 @@ chest_dist_plt <- Data  %>% group_by(Diagnosis_of_disease) %>%
   scale_color_viridis(discrete = TRUE)
 
 
-ggsave(chest_dist_plt, filename="/cloud/project/results/07_chest_dist_plt.png", width = 16, height = 9, dpi = 72)
+ggsave(chest_dist_plt, filename="/cloud/project/results/07_chest_dist_plt.png", 
+       width = 16, height = 9, dpi = 72)
 
 
 # chest pain vs heart attack percentage 
@@ -209,7 +196,9 @@ chest_present_plt <- datadist_chest_present  %>%
   scale_fill_viridis(discrete = TRUE) +
   scale_color_viridis(discrete = TRUE)
 
-ggsave(chest_present_plt, filename="/cloud/project/results/07_chest_present_plt.png", width = 16, height = 9, dpi = 72)
+ggsave(chest_present_plt, 
+       filename="/cloud/project/results/07_chest_present_plt.png", 
+       width = 16, height = 9, dpi = 72)
 
 
 '
@@ -239,7 +228,6 @@ sex_v_cholestoral <- Data %>% ggplot(mapping = aes(x = Sex_cat,
   geom_boxplot(alpha = 0.5) +
   scale_fill_viridis(discrete = TRUE)
 
-ggsave(sex_v_cholestoral, filename="/cloud/project/results/07_sex_v_cholestoral.png", width = 16, height = 9, dpi = 72)
-
-
-
+ggsave(sex_v_cholestoral, 
+       filename="/cloud/project/results/07_sex_v_cholestoral.png", 
+       width = 16, height = 9, dpi = 72)
