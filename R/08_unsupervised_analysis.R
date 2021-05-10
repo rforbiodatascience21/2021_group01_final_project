@@ -44,7 +44,7 @@ Data <- Data_selection(data = data_aug,var = c("Age",
 
   
   
-# vigtigt at fjerne NA inden pca
+# Important to remove NA before pca
 # PCA ---------------------------------------------------------------------
 
 # Create PCA object
