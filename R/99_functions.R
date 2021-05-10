@@ -18,9 +18,11 @@ Data_selection <- function(data, var, rm_na = FALSE, rm_na_from = NULL) {
   return(Data)
 }
 
-Confusion_matrix <-function(Models, Data_test){
+Confusion_matrix <-function(Models=NULL, Data_test){
+  if(is.null(Models) ==FALSE){
     Data_test <- Data_test %>%
       mutate(Predict = predict(Models,Data_test, type = "response"))
+  }
   
     Matrix_confusion <- Data_test %>%
       mutate(Predict_No = case_when(Predict > 0.5 ~ 1, Predict <= 0.5 ~0)) %>%

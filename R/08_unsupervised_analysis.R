@@ -161,3 +161,13 @@ dist_cluster <- data_kmeans_aug %>%
 
 # Save plot as png
 ggsave("results/08_kmeans_dist.png", device = "png")
+
+Data <- data_kmeans_aug %>%
+  mutate(Predict = case_when(Cluster == 1 ~ 1, Cluster == 2 ~0),
+         Diagnosis_of_disease_No=case_when(diagnosis_of_heart_disease == 0 ~ 0, 
+                                           diagnosis_of_heart_disease >= 1 ~ 1)) 
+
+  Matrix_conf2 = Confusion_matrix(Data_test = Data)
+
+save(x = Matrix_conf2,
+       file = "results/08_Matrix_conf.RData")
