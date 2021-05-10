@@ -92,7 +92,8 @@ rotation_matrix <- data_pca %>%
   ggplot(aes(PC1, PC2)) +
   geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
   geom_text(
-    aes(label = column),
+    aes(label = c("Age", "Blood Pressure", "Cholestoral", 
+                  "Heart rate", "ST depression", "flouroscopy")),
     hjust = 1, nudge_x = -0.02, 
     color ="#904C2F"
   ) +
