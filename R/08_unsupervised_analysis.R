@@ -163,7 +163,7 @@ dist_cluster <- data_kmeans_aug %>%
 ggsave("results/08_kmeans_dist.png", device = "png")
 
 Data <- data_kmeans_aug %>%
-  mutate(Predict = case_when(Cluster == 1 ~ 1, Cluster == 2 ~0),
+  mutate(Predict = case_when(Cluster == 1 ~ 0, Cluster == 2 ~1),
          Diagnosis_of_disease_No=case_when(diagnosis_of_heart_disease == 0 ~ 0, 
                                            diagnosis_of_heart_disease >= 1 ~ 1)) 
 
