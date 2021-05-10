@@ -69,7 +69,12 @@ Data was augmented by creating new more insightful columns
 ## Descriptive data analysis and visualisations
 - Distribution according to disease presence
 - General thoughts for data composition ( plot over antal med presence/not presence, sex osv)
-- Data seems balanced  
+- Data seems balanced 
+
+![](/cloud/project/results/Heart_attack_dist.png){width=50%}
+- general distribution of sex and age 
+- vælge nogle af plotsne ud, så det virker som om at vi har en plan 
+
 ![](/cloud/project/results/Summary_density_plots.png){width=50%}
 ```{r, message = FALSE}
 load("/cloud/project/results/04_Summary_table.RData")
@@ -88,13 +93,14 @@ kable(Summary_table,format = "html", digits = 3)%>%
 ## Unsupervised learning: Results from PCA 
 - Data wrangling and handling of NAs 
 - Regions in which the majority of the pool of observations show consistency in presence/absence of disease
+- The first three PCs account for ~70% of the total variance
 - Indicating that we should be able to separate observations with presence of disease from absence of disease 
 ![](/cloud/project/results/08_plot_pca.png){width=50%}
 ![](/cloud/project/results/08_eigenvalues_plot.png){width=50%}
 
 ## Unsupervised learning: Kmeans Cluster
 - Handling of NA and selection of data 
-- Performed on PCA data  
+- Performed on PCA data   
 ![](/cloud/project/results/08_kmeans.png){width=50%}
 ![](/cloud/project/results/08_kmeans_dist.png"){width=50%}
 
@@ -135,6 +141,10 @@ kable(Matrix,format = "html", digits = 3)%>%
 
 ## Discussion
 ### Considerations concerning the data used 
-
+- Missing information as a result of removing rows containing NA
 ### Biological insights 
+- Prevalence of symptoms e.g xx is more abundant for patient with heart disease 
 - Non of the binomial models are good enough for medical use because 20% to 30% of the patients will be wrongly classified 
+
+## Thank you 
+### Questions?
