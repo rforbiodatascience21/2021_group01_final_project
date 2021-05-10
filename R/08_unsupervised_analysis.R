@@ -100,7 +100,7 @@ rotation_matrix <- data_pca %>%
     hjust = 1, nudge_x = -0.02, 
     color ="#904C2F"
   ) +
-  xlim(-1, 1) + ylim(-0.3, 0.8) +
+  xlim(-2, 1) + ylim(-0.35, 0.8) +
   coord_fixed() + # fix aspect ratio to 1:1
   labs(title = "Rotation matrix") +
   theme_minimal_grid(12) 
@@ -129,7 +129,7 @@ plot_pca <- data_pca_aug %>%
 
 pca_combined <- ggarrange(ggarrange(eigenvalues_plot, 
           plot_pca, common.legend = FALSE), 
-          rotation_matrix, ncol=1, nrow=2, common.legend = FALSE)
+          rotation_matrix, ncol = 1, nrow = 2, common.legend = FALSE)
 ggsave("results/08_pca_combined.png", plot = pca_combined, device = "png")
 
 # K-means -----------------------------------------------------------------
