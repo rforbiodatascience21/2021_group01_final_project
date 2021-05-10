@@ -80,11 +80,8 @@ print(data_raw, width = 80, n = 4, n_extra = 1)
 ```
 
 ## Data Cleaning 
-- <font size = "4"> Joined together the 4 data frames by xx </font>
-- <font size = "4"> Handling of missing values </font>
-- <font size = "4"> Number of NAs differed across variables </font>
-- <font size = "4"> Clean small dataset vs large dataset w. NAs </font>
-![](/cloud/project/results/04_NA_Bar.png){width=90%}
+- <font size = "4"> Joined together the 4 data frames - Handling of missing values </font>
+![](/cloud/project/results/04_NA_Bar.png){width=100%}
 
 ## Tidying and wrangling data
 <font size = "4">Data was augmented by creating new more insightful columns</font>
@@ -121,13 +118,15 @@ kable(Summary_table,format = "html", digits = 3)%>%
 - Regions in which the majority of the pool of observations show consistency in presence/absence of disease
 - The first three PCs account for ~70% of the total variance
 - Indicating that we should be able to separate observations with presence of disease from absence of disease 
-![](/cloud/project/results/08_plot_pca.png){width=50%}
-![](/cloud/project/results/08_eigenvalues_plot.png){width=50%}
+
+## Unsupervised learning: Results from PCA 
+![](/cloud/project/results/08_pca_combined.png){width=100%} 
 
 ## Unsupervised learning: Kmeans Cluster
 - Handling of NA and selection of data 
-- Performed on PCA data   
-![](/cloud/project/results/08_kmeans.png){width=50%}
+- Performed on PCA data for K = 2   
+![](/cloud/project/results/08_kmeans.png){width=100%}
+
 ## Unsupervised learning: Kmeans Cluster
 - Classifies ~ 75% is correctly "classified"
 ```{r, echo=FALSE}
@@ -144,7 +143,6 @@ kable(Matrix2,format = "html", digits = 3)%>%
 
 ```
 
-![](/cloud/project/results/08_kmeans_dist.png){width=50%}
 
 ## Supervised learning: Prediction model based on presence of heart disease 
 - <font size = "4">Two binomial regression was created:</font>
@@ -173,6 +171,7 @@ kable(Matrix,format = "html", digits = 3)%>%
 ### Considerations concerning the data used
 - <font size = "4">Use of all 4 databases vs. use of Cleveland_data only </font> 
 - <font size = "4">Missing information as a result of removing rows containing NA</font>
+
 ### Biological insights 
 - <font size = "4">which variables contribute to prediction.</font>
 - <font size = "4"> Binomial regression: 20% to 30% of the patients will be wrongly classified. 
