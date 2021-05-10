@@ -1,3 +1,4 @@
+# Clear workspace ---------------------------------------------------------
 rm(list = ls())
 
 library(broom)
@@ -67,7 +68,7 @@ eigenvalues_plot <- data_pca %>%
   theme_minimal_hgrid(12)
 
 
-#ggsave("results/06_scree.png", plot = scree, device = "png", width = 6.17, height = 3.1)
+ggsave("results/08_eigenvalues_plot.png", plot = eigenvalues_plot, device = "png")
 
 # Augment to add original dataset back in
 data_pca_aug <- data_pca %>% 

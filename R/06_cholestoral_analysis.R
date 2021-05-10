@@ -68,5 +68,5 @@ combined_plot
 Location_plot <- annotate_figure(combined_plot,
                 top = ("Locations relation with cholesterol and heart disease"))
 
-ggsave(Location_plot, filename="/cloud/project/results/Location_plot.png", width = 16, height = 9, dpi = 72)
+ggsave(Location_plot, filename="/cloud/project/results/06_Location_plot.png", width = 16, height = 9, dpi = 72)
 
