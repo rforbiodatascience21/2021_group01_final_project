@@ -1,4 +1,3 @@
-
 Confusion_matrix <-function(Models, Data_test){
     Data_test <- Data_test %>%
       mutate(Predict = predict(Models,Data_test, type = "response"))
