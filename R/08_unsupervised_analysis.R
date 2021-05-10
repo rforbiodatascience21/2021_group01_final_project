@@ -169,3 +169,5 @@ Data <- data_kmeans_aug %>%
 
   Confusion_matrix(Data_test = Data)
 
+  save(x = Matrix_conf2,
+       file = "results/08_Matrix_conf.RData")
