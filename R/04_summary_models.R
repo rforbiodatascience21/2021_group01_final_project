@@ -403,7 +403,7 @@ ggsave(Summary_bar, filename="/cloud/project/results/04_Summary_bar_plots.png",
        width = 16, height = 9, dpi = 72)
 
 # Summary table of numerical data--------------------------------------------------------
-Summary_table <- Data_aug %>% 
+Summary_table_num <- Data_aug %>% 
   select(Age, 
          Resting_blood_pressure, 
          Serum_cholestoral,
@@ -419,8 +419,5 @@ Summary_table <- Data_aug %>%
                                round(sd, 2), ")")) %>% 
   select(type, 'mean w. sd', min, max) 
 
-save(x = Summary_table,
+save(x = Summary_table_num,
      file = "/cloud/project/results/04_Summary_table.RData")
-
-# Summary table of categorical data--------------------------------------------------------
-
