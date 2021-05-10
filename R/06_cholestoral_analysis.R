@@ -14,7 +14,7 @@ Data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz")
 # Plot data ---------------------------------------------------------------
 # Location cholesterol plot
 Location_cholesterol_plot <- Data_aug %>%
-  distinct(Location, Serum_cholestoral) %>%
+  select(Location, Serum_cholestoral) %>%
   drop_na(Serum_cholestoral) %>%
   ggplot(mapping = aes(x = Serum_cholestoral,
                        y = Location)) +
@@ -23,7 +23,7 @@ Location_cholesterol_plot <- Data_aug %>%
   theme(legend.position = "none" )
 
 mean_cholesterol <- Data_aug %>% 
-  distinct(Location, Serum_cholestoral) %>% 
+  select(Location, Serum_cholestoral) %>% 
   drop_na(Serum_cholestoral) %>% 
   group_by(Location) %>% 
   summarise(mean = round(mean(Serum_cholestoral)))
@@ -38,7 +38,7 @@ mean_string <- format_tsv(
 # Location and heart disease plot
 # Here the serum cholesterol is also excluded since this is what is compared.
 Location_disease_plot <- Data_aug %>%
-  distinct(Location, Diagnosis_of_disease ,Serum_cholestoral) %>%
+  select(Location, Diagnosis_of_disease ,Serum_cholestoral) %>%
   drop_na(Serum_cholestoral) %>%
   ggplot(aes(y = Location,
              fill = Diagnosis_of_disease)) +
@@ -49,7 +49,7 @@ Location_disease_plot <- Data_aug %>%
   xlab("Grey = people with disease not present\n Orange = people with disease present")
 
 Diagnosis_percentage <- Data_aug %>% 
-  distinct(Location, Serum_cholestoral,Diagnosis_of_disease) %>% 
+  select(Location, Serum_cholestoral,Diagnosis_of_disease) %>% 
   drop_na(Serum_cholestoral) %>% 
   group_by(Location) %>% 
   count(Diagnosis_of_disease)
