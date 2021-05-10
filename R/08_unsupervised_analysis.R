@@ -46,17 +46,6 @@ data_pca <- data_aug %>%
   scale() %>% # scale data
   prcomp() # do PCA
 
-
-# plot principal components 
-pca_plot1 <- data_pca %>%
-  augment(data_aug) %>% # add original dataset back in
-  ggplot(aes(.fittedPC1, .fittedPC2, color = Diagnosis_of_disease)) +
-  geom_point(size = 1.5) +
-  #scale_color_manual(
-  #  values = c(O = "violet", 1 = "#D55E00", 2 ="#0072B", 3 ="red", 4 = "blue") 
-  #) +
-  theme_classic() + background_grid()
-
 # #Tidy summarizes information about the components of a model.
 # plot Scree plot of eigenvalues  
 eigenvalues_plot <- data_pca %>%
@@ -99,12 +88,21 @@ data_kmeans_aug <- data_kmeans %>%
 # Plot kmeans on two first principal components
 kmeans <- data_kmeans_aug %>% 
   ggplot(aes(x = .fittedPC1,
-             y = .fittedPC2,
-             shape = Diagnosis_of_disease)) +
-  geom_point(aes(color = Cluster), alpha = 0.8) 
+             y = .fittedPC2)) +
+  geom_point(aes(color = Cluster), alpha = 0.8) +
+  labs(title = "Kmeans clustering analysis for K = 2 ")
 
 # Save plot as png
 ggsave("results/08_kmeans.png", device = "png")
 
+# seperation of class 
+dist_cluster <- data_kmeans_aug %>% 
+  group_by(Cluster) %>% 
+  count(Diagnosis_of_disease) %>% ggplot(aes(x = Cluster,
+                                             y = n, 
+                                             fill = Diagnosis_of_disease)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.5) + 
+  labs(title = "Distribution of presence of disease w.r.t assigned cluster")
 
-
+# Save plot as png
+ggsave("results/08_kmeans_dist.png", device = "png")
