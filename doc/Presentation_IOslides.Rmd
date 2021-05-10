@@ -9,18 +9,49 @@ output: ioslides_presentation
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
 library(kableExtra)
+library(tidyverse)
 ```
 
 ## Introduction
-Goal of study:
-- Perform visual analysis of data distribution
-- Classify if patients have heart disease or not according to features in the dataset (PCA, K-means, Binimial regression)
 
-## Methods: data processing
+Introduction to study by xx et. al 
+- Original data
+  - example of raw data collected from Cleveland 
+```{r, message = FALSE}
+data_raw <- read_csv("../data/_raw/processed.cleveland.data")
+print(data_raw, width = 80, n = 4, n_extra = 1)
+```
+- Additional data includes data collected from Hungary, Switzerland and Long Beach 
+
+## Goal of study
+- Perform visual analysis of data distribution
+- Classify if patients have heart disease or not according to features in the dataset (PCA, K-means, Binomial regression)
+
+## Materials and methods: Data processing
+- Data processing, modeling and creation of presentation was performed in Rstudio Cloud.
+- Way of coding follows O'Reillys R for Data Science by Wickham and Grolemund  
+- Whole project exists at github at: 
+https://github.com/rforbiodatascience21/2021_group01_final_project
+
+## Project outline 
+- Loading and cleaning data
+  - Add location variable 
+  - Join data sets 
+- Augmentation of data
+  - Create categorical variables 
+- Analysis and Visualisations
+  - Distribution of presence of heart disease across physiological variables.
+- Unsupervised analysis
+  - PCA
+  - K-means clustering
+- Supervised classification model
+  - Binomial regression 
+
+## Tidying and wrangling data
 Halli halløj\
 ![](/cloud/project/results/Flowchart_R_presentation.png){width=100%}
 
-## Method: Summary 1
+## Analysis and visualisations
 ![](/cloud/project/results/Summary_density_plots.png){width=100%}
 
 ## Method: Summary 2
