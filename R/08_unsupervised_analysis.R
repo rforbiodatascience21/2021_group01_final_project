@@ -167,7 +167,7 @@ Data <- data_kmeans_aug %>%
          Diagnosis_of_disease_No=case_when(diagnosis_of_heart_disease == 0 ~ 0, 
                                            diagnosis_of_heart_disease >= 1 ~ 1)) 
 
-  Confusion_matrix(Data_test = Data)
+  Matrix_conf2 = Confusion_matrix(Data_test = Data)
 
-  save(x = Matrix_conf2,
+save(x = Matrix_conf2,
        file = "results/08_Matrix_conf.RData")
