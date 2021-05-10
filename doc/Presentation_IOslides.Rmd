@@ -76,29 +76,24 @@ head(data_raw, 4) %>% select(1:9)
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 data_processed <- read_tsv("../data/Cleveland.tsv.gz")
 
-head(data_processed,4) %>% select(1:5) %>% 
+head(data_processed, 3) %>% select(1:5) %>% 
   kable(format = "html", 
                 digits = 3) %>%
-                kable_styling(font_size = 13) %>%
-                row_spec(0,font_size = 13)
+                kable_styling(font_size = 10) %>%
+                row_spec(0, font_size = 10)
 
-head(data_processed,4) %>% select(6:9) %>% 
+head(data_processed, 3) %>% select(6:10) %>% 
   kable(format = "html", 
                 digits = 3) %>%
-                kable_styling(font_size = 13) %>%
-                row_spec(0,font_size = 13)
+                kable_styling(font_size = 10) %>%
+                row_spec(0, font_size = 10)
 
-head(data_processed,4) %>% select(10:11) %>% 
+head(data_processed, 3) %>% select(11:14) %>% 
   kable(format = "html", 
                 digits = 3) %>%
-                kable_styling(font_size = 13) %>%
-                row_spec(0,font_size = 13)
+                kable_styling(font_size = 10) %>%
+                row_spec(0, font_size = 10)
 
-head(data_processed,4) %>% select(12:14) %>% 
-  kable(format = "html", 
-                digits = 3) %>%
-                kable_styling(font_size = 13) %>%
-                row_spec(0,font_size = 13)
 ```
 
 
