@@ -74,7 +74,7 @@ eigenvalues_plot <- data_pca %>%
              fill = PC,
              color = PC)) +
   geom_col(alpha = 0.5) + 
-  labs(title = "Amount of total variance explained 
+  labs(title = "Total variance explained 
        by PCs")+ 
   theme(legend.position = "none") +
   scale_fill_viridis() +
