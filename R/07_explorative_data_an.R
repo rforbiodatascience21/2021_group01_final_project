@@ -10,6 +10,7 @@ library(ggplot2)
 library(ggpubr)
 library(broom)
 library(cowplot)
+library(viridis)
 
 #Checking the Data Distribution
 
