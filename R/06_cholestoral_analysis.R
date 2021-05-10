@@ -7,6 +7,7 @@ library(ggplot2)
 library(ggpubr)
 library(broom)  # devtools::install_github("tidymodels/broom")
 library(cowplot)
+library(viridis)
 
 # Functions ---------------------------------------------------------------
 source(file = "R/99_functions.R")
