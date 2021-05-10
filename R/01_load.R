@@ -6,7 +6,7 @@ rm(list = ls())
 library("tidyverse")
 
 
-# Load data ----------------------------------------------------------
+# Load data ---------------------------------------------------------------
 Cleveland_raw <- 
   read_csv("data/_raw/processed.cleveland.data",
            col_names = c("Age","Sex", "Chest_pain_type",

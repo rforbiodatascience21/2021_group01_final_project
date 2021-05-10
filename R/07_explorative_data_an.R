@@ -133,26 +133,6 @@ ggsave(age, filename="/cloud/project/results/07_age.png",
 
 
 ###### other 
-Data = Data %>% 
-  mutate(Age_class = case_when(Age < 20 ~ ">20",
-                               20 <= Age & Age < 30 ~ "20-30",
-                               30 <= Age & Age < 40 ~ "30-40",
-                               40 <= Age & Age < 50 ~ "40-50",
-                               50 <= Age & Age < 60 ~ "50-60",
-                               60 <= Age & Age < 70 ~ "60-70",
-                               70 <= Age & Age < 80 ~ "70-80",
-                               80 <= Age ~ "80<"))
-
-Data <- Data %>%
-  mutate(Age_class = factor(Age_class, levels =  c("20-30", 
-                                                   "30-40", 
-                                                   "40-50",
-                                                   "50-60",
-                                                   "60-70",
-                                                   "70-80",
-                                                   "80<"
-                                                   )))
-
 Data %>% group_by(Age_class)  %>% 
   summarise(n = n()) 
 
