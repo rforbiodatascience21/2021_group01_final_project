@@ -1,3 +1,23 @@
+Data_selection <- function(data, var, rm_na = FALSE, rm_na_from = NULL) {
+  # data = data set
+  # var = list of variables
+  # Rm_na = True if you want to remove na, False if you don't 
+  # rm_na_from = list of variables from which na should be removed
+  ## If
+  if(rm_na == TRUE & is.null(rm_na_from)){
+    rm_na_from <- var}
+  
+  ifelse(rm_na==TRUE,
+          Data<-data %>%
+            select(var) 
+          %>%
+            drop_na(rm_na_from),
+          Data<-data %>%
+            select(var)
+          )
+  return(Data)
+}
+
 Confusion_matrix <-function(Models, Data_test){
     Data_test <- Data_test %>%
       mutate(Predict = predict(Models,Data_test, type = "response"))
