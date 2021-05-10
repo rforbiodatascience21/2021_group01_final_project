@@ -20,7 +20,7 @@ Features in  study by xx et. al
 
 ## Goal of study
 - Perform visual analysis of data distribution
-- Classify if patients have heart disease or not according to features in the dataset (PCA, K-means, Binomial regression)
+- Try to predict if patients have heart disease or not according to features in the dataset (PCA, K-means, Binomial regression)
 
 ## Materials and methods: Data processing
 - Data processing, modeling and creation of presentation was performed in Rstudio Cloud.
@@ -47,7 +47,9 @@ https://github.com/rforbiodatascience21/2021_group01_final_project
 ### Data Import
 - Modified version of data sets was used
 - Identifiers for the variables was not released for raw data 
-- Choice of variables to include
+- 14/76 attributes was used
+- The Cleveland database is the only one that has been used by ML researchers to
+this date
 - Example of raw data collected from Cleveland 
 
 ```{r, message = FALSE}
@@ -147,6 +149,7 @@ kable(Matrix,format = "html", digits = 3)%>%
 ### Considerations concerning the data used 
 - Missing information as a result of removing rows containing NA
 ### Biological insights 
+- which variables contribute to prediction. 
 - Prevalence of symptoms e.g xx is more abundant for patient with heart disease 
 - Non of the binomial models are good enough for medical use because 20% to 30% of the patients will be wrongly classified 
 
