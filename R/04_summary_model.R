@@ -144,3 +144,154 @@ NA_Bar <- ggarrange(plt1, plt2, plt3, plt4, plt5, plt6, plt7,
                     nrow = 2)
 
 ggsave(NA_Bar, filename="/cloud/project/results/NA_Bar.png", width = 16, height = 9, dpi = 72)
+
+
+# Summary density plots---------------------------------------------
+pltchol = Data_aug %>% ggplot(aes(Serum_cholestoral)) + 
+  geom_density(aes(color = Diagnosis_of_disease, fill = Diagnosis_of_disease),alpha=0.2) + 
+  labs(x = "Serum Cholestoral",
+       color = "Diagnosis",
+       fill = "Diagnosis") + 
+  theme_minimal()
+
+pltblood = Data_aug %>% ggplot(aes(Resting_blood_pressure)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Resting blood pressure",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltage = Data_aug %>% ggplot(aes(Age)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Age",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltmax = Data_aug %>% ggplot(aes(Maximum_heart_rate_achieved)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Maximum heart rate achieved",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltST = Data_aug %>% ggplot(aes(ST_depression_induced_by_exercise)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "ST depression",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+pltnum = Data_aug %>% ggplot(aes(Number_of_major_vessels_colored_by_flourosopy)) + 
+  geom_density(aes(color = Diagnosis_of_disease,fill = Diagnosis_of_disease),alpha=0.2) +
+  labs(x = "Major vessels colored",
+       color = "Diagnosis",
+       fill = "Diagnosis") +
+  theme_minimal() +
+  theme(axis.title.y=element_blank())
+
+Summary_density = ggarrange(pltchol,                                                 
+                            pltblood,
+                            pltage,
+                            pltmax,
+                            pltST,
+                            pltnum,
+                            common.legend = TRUE) 
+
+ggsave(Summary_density, filename="/cloud/project/results/Summary_density_plots.png", width = 16, height = 9, dpi = 72)
+
+#Summary bar plots ---------------------------------------------
+datadist_sex <- Data_aug %>% group_by(Sex_cat) %>% 
+  count(Diagnosis_of_disease) 
+
+plot_sex = Data_aug  %>% group_by(Diagnosis_of_disease) %>% count(Sex_cat) %>%
+  ggplot(aes(y = Sex_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Sex",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_chest = Data_aug  %>% group_by(Diagnosis_of_disease) %>% count(Chest_pain_type_cat) %>%
+  ggplot(aes(y = Chest_pain_type_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Chest pain type",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_sugar = Data_aug  %>% group_by(Diagnosis_of_disease) %>% count(Fasting_blood_sugar_cat) %>%
+  ggplot(aes(y = Fasting_blood_sugar_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Fasting blood sugar",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_electro = Data_aug  %>% group_by(Diagnosis_of_disease) %>% count(Resting_electrocardiographic_cat) %>%
+  ggplot(aes(y = Resting_electrocardiographic_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Electrocardiographic",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_exercise = Data_aug  %>% group_by(Diagnosis_of_disease) %>% count(Exercise_induced_angina_cat) %>%
+  ggplot(aes(y = Exercise_induced_angina_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Exercise induced angina",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_ST = Data_aug  %>% group_by(Diagnosis_of_disease) %>% count(slope_of_ST_cat) %>%
+  ggplot(aes(y = slope_of_ST_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Slope of ST",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+plot_Thal = Data_aug  %>% group_by(Diagnosis_of_disease) %>% count(Thal_cat) %>%
+  ggplot(aes(y = Thal_cat, x=n)) +
+  geom_col(aes(color = Diagnosis_of_disease,
+               fill = Diagnosis_of_disease),
+           alpha=0.2,
+           position = "dodge") + 
+  labs(x = "Thal",
+       y = "",
+       color = "Diagnosis of disease",
+       fill = "Diagnosis of disease")
+
+Summary_bar = ggarrange(plot_sex,                                                 
+                        plot_chest,
+                        plot_sugar,
+                        plot_electro,
+                        plot_exercise,
+                        plot_ST,
+                        plot_Thal,
+                        common.legend = TRUE) 
+
+ggsave(Summary_bar, filename="/cloud/project/results/Summary_bar_plots.png", width = 16, height = 9, dpi = 72)
