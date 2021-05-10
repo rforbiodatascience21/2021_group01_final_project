@@ -15,12 +15,14 @@ data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz",
                                   Resting_blood_pressure = col_double(),
                                   Serum_cholestoral = col_double(),
                                   Maximum_heart_rate_achieved = col_double(),
-                                  ST_depression_induced_by_exercise = col_double(),
-                                  Number_of_major_vessels_colored_by_flourosopy = col_double(),
+                                  ST_depression_induced_by_exercise 
+                                  = col_double(),
+                                  Number_of_major_vessels_colored_by_flourosopy 
+                                  = col_double(),
                                   ST_depression_induced_by_exercise = 
                                     col_double(), 
                                   Location = col_character(),
-                                  Diagnosis_of_disease= col_character(), 
+                                  Diagnosis_of_disease = col_character(), 
                                   Sex_cat = col_character(), 
                                   Chest_pain_type_cat = col_character(),
                                   Fasting_blood_sugar_cat = col_character(),
@@ -30,25 +32,25 @@ data_aug <- read_tsv(file = "data/03_data_aug.tsv.gz",
                                   slope_of_ST_cat = col_character(),
                                   Thal_cat = col_character(),
                                   Age_class = col_character(), 
-                                  diagnosis_of_heart_disease =col_character() )) 
+                                  diagnosis_of_heart_disease = col_character())) 
 
-Data <- Data_selection(data = data_aug, var = c("Age",
-                                               "Resting_blood_pressure",
-                                               "Serum_cholestoral", 
-                                               "Maximum_heart_rate_achieved",
-                                               "ST_depression_induced_by_exercise", 
-                                               "Location", 
-                                               "Diagnosis_of_disease",
-                                               "Sex_cat", 
-                                               "Chest_pain_type_cat",
-                                               "Fasting_blood_sugar_cat",
-                                               "Resting_electrocardiographic_cat",
-                                               "slope_of_ST_cat",
-                                               "Thal_cat",
-                                               "Age_class", 
-                                               "diagnosis_of_heart_disease", 
-                                               "Number_of_major_vessels_colored_by_flourosopy"), rm_na = TRUE) 
-                                               "diagnosis_of_heart_disease"), 
+Data <- Data_selection(data = data_aug, 
+                       var = c("Age",
+                               "Resting_blood_pressure",
+                               "Serum_cholestoral",
+                               "Maximum_heart_rate_achieved",
+                               "ST_depression_induced_by_exercise",
+                               "Location",
+                               "Diagnosis_of_disease",
+                               "Sex_cat", 
+                               "Chest_pain_type_cat",
+                               "Fasting_blood_sugar_cat",
+                               "Resting_electrocardiographic_cat",
+                               "slope_of_ST_cat",
+                               "Thal_cat",
+                               "Age_class",
+                               "diagnosis_of_heart_disease",
+                               "Number_of_major_vessels_colored_by_flourosopy"), 
                        rm_na = TRUE) 
 
 # Important to remove NA before pca
@@ -99,7 +101,8 @@ rotation_matrix <- data_pca %>%
   labs(title = "Rotation matrix") +
   theme_minimal_grid(12) 
 
-ggsave("results/08_rotation_matrix.png", plot = eigenvalues_plot, device = "png")
+ggsave("results/08_rotation_matrix.png", plot = eigenvalues_plot, 
+       device = "png")
 
 # Augment to add original dataset back in
 data_pca_aug <- data_pca %>% 
@@ -137,7 +140,7 @@ kmeans <- data_kmeans_aug %>%
   ggplot(aes(x = .fittedPC1,
              y = .fittedPC2)) +
   geom_point(aes(color = Cluster), alpha = 0.8) +
-  labs(title = "Kmeans clustering analysis for K = 2 ") +
+  labs(title = "Kmeans clustering analysis for K = 2") +
   scale_color_viridis(discrete = TRUE)
 
 # Save plot as png
@@ -163,7 +166,7 @@ dist_cluster <- data_kmeans_aug %>%
 ggsave("results/08_kmeans_dist.png", device = "png")
 
 Data <- data_kmeans_aug %>%
-  mutate(Predict = case_when(Cluster == 1 ~ 1, Cluster == 2 ~0),
+  mutate(Predict = case_when(Cluster == 1 ~ 0, Cluster == 2 ~1),
          Diagnosis_of_disease_No=case_when(diagnosis_of_heart_disease == 0 ~ 0, 
                                            diagnosis_of_heart_disease >= 1 ~ 1)) 
 
