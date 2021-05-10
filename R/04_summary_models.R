@@ -36,9 +36,7 @@ Corr_plot <- ggpairs(Data_aug,
   labs(title = "Correlation plots of predictive variables stratified on diagnosis") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 Corr_plot
-png(filename="/cloud/project/results/Summary_correlation_plots.png",  width = 1000, height = 800)
-Corr_plot
-dev.off()
+
 
 
 # NA plots---------------------------------
@@ -145,7 +143,7 @@ NA_Bar <- ggarrange(plt1, plt2, plt3, plt4, plt5, plt6, plt7,
                     ncol = 7,
                     nrow = 2)
 
-ggsave(NA_Bar, filename="/cloud/project/results/NA_Bar.png", width = 16, height = 9, dpi = 72)
+ggsave(NA_Bar, filename="/cloud/project/results/04_NA_Bar.png", width = 16, height = 9, dpi = 72)
 
 
 # Summary density plots---------------------------------------------
@@ -204,7 +202,7 @@ Summary_density = ggarrange(pltchol,
                             pltnum,
                             common.legend = TRUE) 
 
-ggsave(Summary_density, filename="/cloud/project/results/Summary_density_plots.png", width = 16, height = 9, dpi = 72)
+ggsave(Summary_density, filename="/cloud/project/results/04_Summary_density_plots.png", width = 16, height = 9, dpi = 72)
 
 #Summary bar plots ---------------------------------------------
 datadist_sex <- Data_aug %>% group_by(Sex_cat) %>% 
@@ -296,4 +294,4 @@ Summary_bar = ggarrange(plot_sex,
                         plot_Thal,
                         common.legend = TRUE) 
 
-ggsave(Summary_bar, filename="/cloud/project/results/Summary_bar_plots.png", width = 16, height = 9, dpi = 72)
+ggsave(Summary_bar, filename="/cloud/project/results/04_Summary_bar_plots.png", width = 16, height = 9, dpi = 72)
