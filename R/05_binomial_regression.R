@@ -55,10 +55,10 @@ Plot3 <- Data %>%
 
 #To get around the problem with the different data sizes, 
 # we remove the rows containing NA
-Data <- Data %>%
-  mutate(Diagnosis_of_disease_No=factor(Diagnosis_of_disease_No))%>%
-  select(Diagnosis_of_disease_No,Age,Sex,Chest_pain_type, id) %>%
-  na.omit()
+
+Data <- Data_selection(data = Data,var = c("Diagnosis_of_disease_No","Age","Sex","Chest_pain_type", "id"), rm_na = TRUE) %>%
+  mutate(Diagnosis_of_disease_No=factor(Diagnosis_of_disease_No))
+
 
 Data_model <- Data %>%
   sample_frac(.70)
