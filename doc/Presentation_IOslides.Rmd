@@ -74,9 +74,25 @@ head(data_raw, 4) %>% select(1:9)
 ```
 ## All included variables
 ```{r, echo = FALSE, warning = FALSE, message = FALSE}
-data_processed <- read_tsv("../data/cleveland.tsv.gz")
-head(data_processed, 4) %>% select(1:7)
-head(data_processed, 4) %>% select(8:14)
+data_processed <- read_tsv("../data/Cleveland.tsv.gz")
+
+head(data_processed,4) %>% select(1:5) %>% 
+  kable(format = "html", 
+                digits = 3) %>%
+                kable_styling(font_size = 10) %>%
+                row_spec(0,font_size = 10)
+
+head(data_processed,4) %>% select(6:10) %>% 
+  kable(format = "html", 
+                digits = 3) %>%
+                kable_styling(font_size = 10) %>%
+                row_spec(0,font_size = 10)
+
+head(data_processed,4) %>% select(11:14) %>% 
+  kable(format = "html", 
+                digits = 3) %>%
+                kable_styling(font_size = 10) %>%
+                row_spec(0,font_size = 10)
 ```
 
 
